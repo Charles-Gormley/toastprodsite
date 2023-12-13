@@ -10,6 +10,14 @@
       "StackName": "amplify-toastprodsite-dev-44656",
       "StackId": "arn:aws:cloudformation:us-east-1:966265353179:stack/amplify-toastprodsite-dev-44656/8df86c00-999c-11ee-9b13-0e767ec9bc4f",
       "AmplifyAppId": "drgupsoln6cmb"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "drgupsoln6cmb",
+          "type": "cicd"
+        }
+      }
     }
   }
 }

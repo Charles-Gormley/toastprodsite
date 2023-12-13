@@ -11,7 +11,7 @@ function Home() {
             <h1 className="big-title">The Future of News is here</h1>
           </div>
           <div className="home-description">
-            <p>Experience AI Curated Podcasts & Newsletters at your fingertips. Only hear about stories you actually care about, without the bias, in the most entertaining way there is.</p>
+            <p>Experience AI Curated Podcasts at your fingertips. Only hear about stories you actually care about, without the bias, in the most entertaining way there is.</p>
           </div>
         </div>
         <SpinningModel />
