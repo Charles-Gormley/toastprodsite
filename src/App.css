@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.ConfigurationForm{
+  text-align: left;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -9,30 +13,277 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
   }
 }
 
+
+#spinning-wheel {
+  float: right;
+  width: 500%; /* Set the width to 40% to position it on the right 40% of the screen */
+  height: 100%;
+  margin-right:20px; /* Add a left margin as needed */
+  
+  background-color: rgb(255, 255, 255); /* Add a background color for visibility */
+}
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  padding: 0.5rem;
+}
+
+.logo {
+  height: 50px; /* Adjust size as needed */
+  margin-right: 1rem;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu a {
+  color: rgb(10, 10, 10);
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.home-title {
+  width: 100%;
+  margin-top: 100px;
+  
+}
+
+.content {
+  display: flex;
+  justify-content: space-between; /* Align items horizontally with space between */
+  width: 100%; /* Full width to occupy the available space */
+  margin-left: 10px;
+  margin-top:100px;
+}
+
+.big-title {
+  text-align: left;
+  font-size: 45px;
+}
+
+.title-description {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.home-description {
+  margin-left: 10px; /* Adjust the left indent as needed */
+}
+
+
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(20, 20, 18);
 }
+
+
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+
+
+.slider-container,
+.format-selection,
+.newsletter-options,
+.podcast-options,
+.option, /* Add this for any other container that groups form controls */
+.dropdown-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: left; /* Center items horizontally within each control group */
+  width: 100%; /* Full width to allow centering */
+  gap: 10px; /* Space between label and control within the group */
+}
+
+.form-group label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Adjust the width of the select elements to fit content */
+select {
+  width: auto; /* Adjust to 'auto' or specific width as needed */
+}
+
+/* Optional: Style the range slider to look better */
+.controls select,
+.controls input[type="text"],
+.controls input[type="range"] {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 300px; /* Adjust the width as desired */
+  margin: 0; /* Override any browser-specific margins */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: #fafafa;
+  cursor: pointer;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, .6);
+}
+
+input[type="range"]::-moz-range-thumb {
+
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
+}
+
+.slider-container span,
+.newsletter-options span,
+.podcast-options span {
+  /* Styles for the text displaying the value of sliders */
+}
+
+.submit-container button {
+  
+  border-radius: 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: background-color 1s;
+  font-size: 20px; /* Larger font size for better visibility */
+  padding: 15px 30px; /* Larger padding for a bigger button */
+  border-radius: 8px; /* Optional: rounded corners */
+  margin-bottom: 100px;
+  
+}
+
+.submit-container button:hover {
+  background-color: #e8faff; /* Darker shade on hover for visual feedback */
+}
+
+
+.topics-container {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+  gap: 10px; /* Space between buttons */
+}
+
+.topic-button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s;
+}
+
+.topic-button.selected {
+  background-color: #e8faff; /* Slightly darker when selected */
+}
+
+
+
+.advanced-topic {
+  display: inline-block;
+  margin-right: 10px;
+  border-color: black;
+  background-color: #ffffff;
+  border-radius: 20px;
+  font-size: 0.5em; /* Smaller font size for topics */
+}
+
+.advanced-topic button {
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Making paragraph text smaller */
+.ConfigurationForm p {
+  font-size: 0.54em; /* Adjust as needed */
+}
+
+.tone-container {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.tones-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+  gap: 10px;
+}
+
+.tone-button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s;
+}
+
+.tone-button.selected {
+  background-color: #e8faff; /* Highlight for the selected tone */
+}
+
+@keyframes dotAnimation {
+  0% { content: '.🎙️'; }
+  33% { content: '..🗞️'; }
+  66% { content: '...🤓'; }
+  100% { content: '🐢'; }
+}
+
+.loadingDots::after {
+  content: '';
+  animation: dotAnimation 1.5s infinite;
 }

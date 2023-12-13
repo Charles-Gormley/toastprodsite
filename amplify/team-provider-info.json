@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-toastprodsite-dev-44656-authRole",
+      "UnauthRoleArn": "arn:aws:iam::966265353179:role/amplify-toastprodsite-dev-44656-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::966265353179:role/amplify-toastprodsite-dev-44656-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-toastprodsite-dev-44656-deployment",
+      "UnauthRoleName": "amplify-toastprodsite-dev-44656-unauthRole",
+      "StackName": "amplify-toastprodsite-dev-44656",
+      "StackId": "arn:aws:cloudformation:us-east-1:966265353179:stack/amplify-toastprodsite-dev-44656/8df86c00-999c-11ee-9b13-0e767ec9bc4f",
+      "AmplifyAppId": "drgupsoln6cmb"
+    }
+  }
+}
