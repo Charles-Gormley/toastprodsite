@@ -14,7 +14,7 @@ function App() {
             <img src={logo} alt="Logo" className="logo" />
             <div className="menu">
               <Link to="/">Home</Link>
-              <Link to="/">Generate Podcast</Link>
+              <Link to="/configure">Generate Podcast</Link>
               {/* Add other links as needed */}
             </div>
           </nav>
