@@ -66,11 +66,28 @@ function Configure() {
       if (selectedTopics.length === 0 && advancedTopics.length === 0) {
         setShowAlert(true);
         return;
-      }d
+      }
       setIsLoading(true);
       setShowAlert(false);
 
-      let basicTopics = selectedTopics;
+      let basicTopics = [];
+
+      const topicsDictionary = {
+        'politics 🏛️': 'The US Governement and bodies such as the president, congress, and the judicial branch.',
+        'technology⚙️': 'New products in tech companies, new cutting edge technology, politics of technology companies.',
+        'finance 💵': 'Interest rates, markets, and financial sentiment effecting macroeconomics and consumers.',
+        'science🧪': 'New findings in biology, chemistry, physics that could change the way society works in 100 years.',
+        'health⚕️': 'New findings in medicine, surgery, doctors, and genetics.',
+        'environment🌴': 'Wildfires, CO2 emissions, deforestation and anything that has to do with climate change or the environment.'
+      };
+
+      selectedTopics.forEach(topic => {
+        if (topicsDictionary[topic] !== undefined) {
+          // If the topic exists in topicsDictionary, add its value to basicTopics
+          basicTopics.push(topicsDictionary[topic]);
+        }
+      });
+
       let length = podcastLength;
 
       timePerArticle = parseInt(timePerArticle);
@@ -129,6 +146,16 @@ function Configure() {
 
 
   const availableTopics = ['politics 🏛️', 'technology⚙️', 'finance 💵', 'science🧪', 'health⚕️', 'environment🌴'];
+
+  const topicsDictionary = {
+    'politics 🏛️': '',
+    'technology⚙️': '',
+    'finance 💵': '',
+    'science🧪': '',
+    'health⚕️': '',
+    'environment🌴': ''
+  };
+
   const handleTopicSelection = (topic) => {
     setSelectedTopics(prevTopics =>
         prevTopics.includes(topic) 
