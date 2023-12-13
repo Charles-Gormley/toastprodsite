@@ -66,7 +66,7 @@ function Configure() {
       if (selectedTopics.length === 0 && advancedTopics.length === 0) {
         setShowAlert(true);
         return;
-      }
+      }d
       setIsLoading(true);
       setShowAlert(false);
 
