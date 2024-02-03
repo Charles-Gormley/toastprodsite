@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './TTLogo.png';
+import logo from './assets/images/TTLogo.png';
 
 function Configure() {
     var [format, setFormat] = useState('Podcast');
