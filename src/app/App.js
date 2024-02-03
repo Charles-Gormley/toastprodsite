@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from '../Home'; 
 import Configure from '../Configure'; 
-import logo from './TTLogo.png'
+import logo from '../assets/images/TTLogo.png';
 import './App.css';
 
 
