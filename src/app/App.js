@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './Home'; // Your home landing page component
-import Configure from './Configure'; // Your configuration page component
+import Home from '../Home'; 
+import Configure from '../Configure'; 
 import logo from './TTLogo.png'
 import './App.css';
 
