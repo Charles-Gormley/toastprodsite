@@ -1,57 +1,41 @@
-import React from 'react';
-import Container from './Container';
+import React from "react";
+import Image from "next/image";
+import heroImage from "../assets/homepage_art.png";
+import Container from "./Container";
+import Link from "next/link";
 
-interface HomePageProps {
+interface HeroSectionProps {
   title?: string;
   subtitle?: string;
-  startLink?: { href: string; label: string };
-  learnMoreLink?: { href: string; label: string };
 }
 
-const HomePage: React.FC<HomePageProps> = ({
-  title,
-  subtitle,
-  startLink,
-  learnMoreLink,
-}) => {
+const HeroSection = ({ title, subtitle }: HeroSectionProps) => {
   return (
-    <div className="relative dark:bg-gray-900" id="home"> {/* dark mode background */}
+    <>
       <Container>
-        <div className="relative pt-36 ml-auto">
-          <div className="lg:w-2/3 text-center mx-auto">
-            {title && (
-              <h1 className="text-gray-900 dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">
-                {title} <span className="text-primary dark:text-white"></span>
-              </h1>
-            )}
-            {subtitle && (
-              <p className="mt-8 text-gray-700 dark:text-gray-300">
-                {subtitle}
-              </p>
-            )}
-            <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
-              {startLink && (
-                <a
-                  href={startLink.href}
-                  className="relative flex h-11 w-full items-center justify-center px-6 bg-primary dark:bg-primary-dark text-white font-semibold rounded-full transition duration-300 hover:scale-105 active:scale-95 sm:w-max"
-                >
-                  {startLink.label}
-                </a>
-              )}
-              {learnMoreLink && (
-                <a
-                  href={learnMoreLink.href}
-                  className="relative flex h-11 w-full items-center justify-center px-6 bg-primary/10 dark:bg-primary-dark/10 text-primary dark:text-white font-semibold rounded-full transition duration-300 hover:scale-105 active:scale-95 border border-transparent sm:w-max"
-                >
-                  {learnMoreLink.label}
-                </a>
-              )}
-            </div>
+        <main className="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24">
+          <div className="py-6 md:order-1 hidden md:block">
+            <Image
+              src={heroImage}
+              alt="Astroship Starter Template"
+              width={600}
+              height={400}
+              layout="responsive"
+              className="rounded-lg"
+            />
           </div>
-        </div>
+          <div>
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
+              {title}
+            </h1>
+            <p className="text-lg mt-4 text-slate-600 max-w-xl">
+              {subtitle}
+            </p>
+          </div>
+        </main>
       </Container>
-    </div>
+    </>
   );
 };
 
-export default HomePage;
+export default HeroSection;
