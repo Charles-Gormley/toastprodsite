@@ -10,14 +10,20 @@ const NavBar: React.FC = () => {
             Tokenized Toast
           </span>
         </div>
-        
+
         <ul className="flex space-x-4">
-          <li className="text-gray-900 dark:text-white"><Link href="/"> Home </Link></li>
-          <li className="text-gray-900 dark:text-white"><Link href="/about"> About Us </Link></li>
-          <li className="text-gray-900 dark:text-white"><Link href="/contact">Contact Us</Link></li>
+          <li className="text-gray-900 dark:text-white">
+            <Link href="/"> Home </Link>
+          </li>
+          <li className="text-gray-900 dark:text-white">
+            <Link href="/about"> About Us </Link>
+          </li>
+          <li className="text-gray-900 dark:text-white">
+            <Link href="/contact">Contact Us</Link>
+          </li>
         </ul>
         <button className="rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-black dark:bg-transparent dark:border dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black transition duration-300">
-          Create Your Podcast
+          <Link href="/podcast">Create Your Podcast</Link>
         </button>
       </nav>
     </>
