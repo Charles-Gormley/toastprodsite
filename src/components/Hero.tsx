@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import heroImage from "../assets/homepage_art.png";
+import heroImage from "../assets/heroImg.png";
 import Container from "./Container";
 import Link from "next/link";
 
@@ -17,9 +17,7 @@ const HeroSection = ({ title, subtitle }: HeroSectionProps) => {
           <div className="py-6 md:order-1 hidden md:block">
             <Image
               src={heroImage}
-              alt="Astroship Starter Template"
-              width={600}
-              height={400}
+              alt="Charlie The Podcaster"
               layout="responsive"
               className="rounded-lg"
             />
