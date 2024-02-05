@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   return (
     <Container>
-      <main className="flex flex-col lg:flex-row">
+      <main className="flex flex-col lg:flex-row dark:text-white">
         <div className="flex-1">
           <Image src={imageSrc} alt="Hero Image" width={500} height={300} objectFit="cover" />
         </div>
