@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../assets/logo.svg';
 
+const li_hover = "text-gray-900 dark:text-white hover:font-bold"
+
 const NavBar: React.FC = () => {
   return (
     <nav className="flex justify-between items-center py-4 px-6 bg-white dark:bg-gray-900">
@@ -14,13 +16,13 @@ const NavBar: React.FC = () => {
       </div>
 
       <ul className="flex space-x-4">
-        <li className="text-gray-900 dark:text-white">
+        <li className={li_hover}>
           <Link href="/"> Home </Link>
         </li>
-        <li className="text-gray-900 dark:text-white">
+        <li className={li_hover}>
           <Link href="/about"> About Us </Link>
         </li>
-        <li className="text-gray-900 dark:text-white">
+        <li className={li_hover}>
           <Link href="/contact">Contact Us</Link>
         </li>
       </ul>
