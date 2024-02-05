@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 import HeroImg from "../../assets/placeholder_signup.png";
 
 const SignUp = () => {
@@ -33,9 +34,9 @@ const SignUp = () => {
             Create Account
           </button>
           <div className="text-center mt-4">
-            <a href="/login" className="text-sm text-gray-500 hover:underline">
+            <Link href="/login" className="text-sm text-gray-500 hover:underline">
               Already have an account? Log In
-            </a>
+            </Link>
           </div>
         </div>
       </div>
