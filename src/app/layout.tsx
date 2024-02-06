@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -16,6 +17,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <>
       <Navbar />
       <main className={inter.className}>{children}</main>
+      <Footer />
     </>
   );
 };
