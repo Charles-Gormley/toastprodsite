@@ -32,7 +32,7 @@ const TopicButton: React.FC<TopicButtonProps> = ({ label }) => {
   return (
     <button
       type="button"
-      className="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center mr-2 mb-2 focus:outline-none focus:shadow-outline hover:bg-gray-300"
+      className="btn bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center mr-2 mb-2 focus:outline-none focus:shadow-outline hover:bg-gray-300"
     >
       {label}
     </button>
@@ -108,7 +108,7 @@ const NewsInterests: React.FC = () => {
       <div className="flex justify-center mt-6">
         <button
           type="submit"
-          className="bg-blue-500 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700"
+          className="btn bg-blue-500 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700"
         >
           Submit
         </button>
