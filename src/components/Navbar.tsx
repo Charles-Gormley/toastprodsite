@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
         </li>
       </ul>
       {/* Update button classes for dark mode */}
-      <button className="rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent dark:border-white dark:bg-white dark:text-black dark:hover:bg-gray-900 dark:hover:text-white transition duration-300">
+      <button className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent dark:border-white dark:bg-white dark:text-black dark:hover:bg-gray-900 dark:hover:text-white transition duration-300">
         <Link href="/login">Create Your Podcast</Link>
       </button>
     </nav>
