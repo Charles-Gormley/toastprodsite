@@ -82,7 +82,6 @@ const NewsInterests: React.FC = () => {
           type="range"
           min={0}
           max={7}
-          value="1"
           className="range"
           step="1"
         />
