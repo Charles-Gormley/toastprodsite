@@ -12,14 +12,18 @@ export const metadata: Metadata = {
   description: "AI Podcast Generator",
 };
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+// Create a root layout component to encapsulate the <html> and <body> tags
+const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <>
-      <Navbar />
-      <main className={inter.className}>{children}</main>
-      <Footer />
-    </>
+    <html lang="en">
+      <head></head>
+      <body>
+        <Navbar />
+        <main className={inter.className}>{children}</main>
+        <Footer />
+      </body>
+    </html>
   );
 };
 
-export default Layout;
+export default RootLayout;
