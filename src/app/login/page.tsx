@@ -1,19 +1,19 @@
-import React from 'react';
-import Link from 'next/link';
-import HeroImg from '../../assets/placeholder_login.png';
+import React from "react";
+import Link from "next/link";
+import HeroImg from "../../assets/placeholder_login.png";
 
 const SignUp = () => {
   return (
-    <div className="flex min-h-screen bg-white">
-      <div className="w-1/2 flex justify-center items-center bg-cover p-10">
+    <div className="flex flex-wrap min-h-screen bg-white">
+      <div className="flex justify-center items-center w-full lg:w-1/2 bg-cover p-10">
         <img
-            src={HeroImg.src}
+          src={HeroImg.src}
           alt="Hero"
-          className="max-w-xs md:max-w-sm m-auto"
+          className="max-w-xs sm:max-w-sm m-auto"
         />
       </div>
 
-      <div className="w-1/2 flex justify-center items-center p-10">
+      <div className="flex justify-center items-center w-full lg:w-1/2 p-10">
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-bold mb-6 text-center text-gray-900">
             Welcome Back!
@@ -34,9 +34,7 @@ const SignUp = () => {
             Create Account
           </button>
           <div className="text-center mt-4">
-            <Link href="/signup" className="text-sm text-gray-500 hover:underline">
-              Don't have an account? Sign Up
-            </Link>
+            <Link href="/signup">Don't have an account? Sign Up</Link>
           </div>
         </div>
       </div>
