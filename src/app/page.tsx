@@ -30,7 +30,7 @@ export default function Home() {
               "Experience mathematically unbiased news. We’ve scoured the internet to bring you balanced input from all sides of the story in an easy to digest format.",
           },
         ]}
-        imageSrc="/path/to/your/image.png"
+        imageSrc={"/path/to/your/image.png"}
       />
     </div>
   );
