@@ -11,14 +11,12 @@ interface HeroSectionProps {
   heading: string;
   subHeading: string;
   features: Feature[];
-  imageSrc: string; // Assuming the image is hosted and accessible via a URL
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
   heading,
   subHeading,
   features,
-  imageSrc,
 }) => {
   return (
     <Container>
