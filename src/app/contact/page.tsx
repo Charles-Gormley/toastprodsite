@@ -4,6 +4,7 @@ import placeholder1 from "../../assets/placeholder_about1.png";
 export default function Contact() {
   return (
     <div>
+
       <div className="flex flex-col md:flex-row justify-center items-center md:h-64 mb-8 space-y-4 md:space-y-0">
         <h1 className="text-black text-center font-bold text-5xl md:text-7xl mb-4 md:mb-0 md:mr-8">Get in Touch</h1>
         <div className="flex justify-center">
@@ -25,6 +26,7 @@ export default function Contact() {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+
                 id="firstName"
                 type="text"
                 placeholder="First Name"
@@ -36,17 +38,20 @@ export default function Contact() {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+
                 id="lastName"
                 type="text"
                 placeholder="Last Name"
               />
             </div>
+            
             <div className="px-2 w-full lg:w-1/3">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                 Email
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+
                 id="email"
                 type="email"
                 placeholder="name@example.com"
