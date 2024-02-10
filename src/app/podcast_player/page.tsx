@@ -96,21 +96,6 @@ export default function PodcastPlayer() {
             ></progress>
           </div>
         </div>
-        {/* <div className="flex flex-col">
-          <h3 className="my-3 p-4 font-bold">Segments</h3>
-          <button className="bg-gray-700 hover:bg-gray-600 text-white font-bold p-4 rounded-lg mb-4">
-            Intro
-          </button>
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold p-4 rounded-lg mb-4">
-            Segment 1
-          </button>
-          <button className="bg-gray-700 hover:bg-gray-600 text-white font-bold p-4 rounded-lg mb-4">
-            Segment 2
-          </button>
-          <button className="bg-gray-700 hover:bg-gray-600 text-white font-bold p-4 rounded-lg mb-4">
-            Segment 3
-          </button>
-        </div> */}
       </div>
     </div>
   );
