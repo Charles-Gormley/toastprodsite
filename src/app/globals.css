@@ -18,3 +18,7 @@ body {
     background-color: #1A202C;
   }
 }
+
+._play_rfl62_1, ._shuffle_15ul3_1, ._next_147p5_1, ._loop_1v4pf_1, ._previous_1mino_1, ._pause_1talx_1 {
+  filter: brightness(0%);
+}

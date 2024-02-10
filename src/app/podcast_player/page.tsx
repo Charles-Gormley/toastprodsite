@@ -1,6 +1,36 @@
+"use client"
+
 import MediaButtons from "@/components/MediaButtons";
+import Player from "@madzadev/audio-player";
+import "@madzadev/audio-player/dist/index.css";
 
 export default function PodcastPlayer() {
+  const colors = {
+    playerBackground: "#d1d5db",
+    titleColor: "#000000",
+    timeColor: "#000000",
+    progressSlider: "#9440f3",
+    progressUsed: "#000000",
+    progressLeft: "#151616",
+    bufferLoaded: "#202222",
+    volumeSlider: "#9440f3",
+    volumeUsed: "#000000",
+    volumeLeft: "#151616",
+  };
+  
+  const tracks = [
+    {
+      url: "StarWars60.wav",
+      title: "Test",
+      tags: [],
+    },
+    {
+      url: "https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3",
+      title: "Test2",
+      tags: [],
+    }
+  ];
+
   return (
     <div className="flex flex-col h-screen">
       <div className="flex justify-center h-4/5">
@@ -19,7 +49,15 @@ export default function PodcastPlayer() {
             </p>
           </div>
           <div className="bg-gray-300 w-full h-1/4 relative flex-col">
-            <MediaButtons />
+            {tracks && <Player
+              trackList={tracks}
+              includeTags={false}
+              includeSearch={false}
+              showPlaylist={false}
+              sortTracks={true}
+              autoPlayNextTrack={true}
+              customColorScheme={colors}
+            />}
             <progress
               className="progress w-3/4 flex m-auto mt-5 progress-black"
               value="70"
@@ -28,6 +66,9 @@ export default function PodcastPlayer() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
+
+
