@@ -9,11 +9,11 @@ export default function PodcastPlayer() {
     playerBackground: "#d1d5db",
     titleColor: "#000000",
     timeColor: "#000000",
-    progressSlider: "#9440f3",
+    progressSlider: "#eab308",
     progressUsed: "#000000",
     progressLeft: "#151616",
     bufferLoaded: "#202222",
-    volumeSlider: "#9440f3",
+    volumeSlider: "#eab308",
     volumeUsed: "#000000",
     volumeLeft: "#151616",
   };
