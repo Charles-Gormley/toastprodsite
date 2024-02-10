@@ -58,11 +58,6 @@ export default function PodcastPlayer() {
               autoPlayNextTrack={true}
               customColorScheme={colors}
             />}
-            <progress
-              className="progress w-3/4 flex m-auto mt-5 progress-black"
-              value="70"
-              max="100"
-            ></progress>
           </div>
         </div>
       </div>
