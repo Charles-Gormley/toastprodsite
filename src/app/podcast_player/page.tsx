@@ -8,7 +8,7 @@ import skip_fwd from "./images/skip_fwd.png";
 
 export default function PodcastPlayer() {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-screen">
       <div className="flex justify-center h-4/5">
         <div className="flex flex-col items-center w-1/2 mr-9">
           <div className="flex mt-4 w-full bg-gray-300">
