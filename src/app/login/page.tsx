@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import HeroImg from "../../assets/placeholder_login.png";
 
-const SignUp = () => {
+const LogIn = () => {
   return (
     <div className="flex flex-wrap min-h-screen bg-white">
       <div className="flex justify-center items-center w-full lg:w-1/2 bg-cover p-10">
@@ -31,7 +31,7 @@ const SignUp = () => {
             />
           </div>
           <button className="w-full mt-6 px-4 py-3 bg-black text-white font-bold rounded hover:bg-gray-700">
-            Create Account
+            Log In
           </button>
           <div className="text-center mt-4">
             <Link href="/signup">Don't have an account? Sign Up</Link>
@@ -42,4 +42,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default LogIn;
