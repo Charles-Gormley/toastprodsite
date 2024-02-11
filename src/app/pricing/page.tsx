@@ -69,17 +69,19 @@ const pricing: PricingPlan[] = [
 
 const PricingPage = () => {
   return (
-    <Container>
-      <SectionHead
-        title="Pricing"
-        description="Stream & Listen with Ease. Transparent Pricing, No Hidden Fees."
-      />
-      <div className="grid md:grid-cols-3 gap-10 mx-auto max-w-screen-lg mt-12">
-        {pricing.map((plan) => (
-          <PricingCard key={plan.name} plan={plan} />
-        ))}
-      </div>
-    </Container>
+    <div className="h-screen">
+      <Container>
+        <SectionHead
+          title="Pricing"
+          description="Stream & Listen with Ease. Transparent Pricing, No Hidden Fees."
+        />
+        <div className="grid md:grid-cols-3 gap-10 mx-auto max-w-screen-lg mt-12">
+          {pricing.map((plan) => (
+            <PricingCard key={plan.name} plan={plan} />
+          ))}
+        </div>
+      </Container>
+    </div>
   );
 };
 
