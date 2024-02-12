@@ -3,7 +3,7 @@ import placeholder1 from "../../assets/placeholder_about1.png";
 
 export default function Contact() {
   return (
-    <div>
+    <div className="h-screen">
       <div className="flex flex-col md:flex-row justify-center items-center md:h-64 mb-8 space-y-4 md:space-y-0">
         <h1 className="text-black text-center font-bold text-5xl md:text-7xl mb-4 md:mb-0 md:mr-8">
           Get in Touch
