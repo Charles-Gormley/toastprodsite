@@ -5,7 +5,7 @@ import VerificationInput from "react-verification-input";
 
 export default function Verification({ params }: { params: { email: string}}) {
     
-    // const router = useRouter()
+    const router = useRouter()
     async function handleComplete(verification_code: string) {
         try {
             const response = await fetch("https://api.tokenizedtoast.com/verify", {
@@ -18,7 +18,7 @@ export default function Verification({ params }: { params: { email: string}}) {
         const data = await response.json();
         if (response.ok) {
             console.log("verification successful:", data);
-            // router.push('/login');
+            router.push('/login');
         } else {
             console.log(data.message || 'Verification failed');
         }
