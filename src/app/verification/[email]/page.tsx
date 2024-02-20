@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import VerificationInput from "react-verification-input";
 
 export default function Verification({ params }: { params: { email: string}}) {
