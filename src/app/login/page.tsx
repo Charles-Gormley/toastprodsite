@@ -1,10 +1,13 @@
 'use client'
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
 import Link from "next/link";
 import HeroImg from "../../assets/placeholder_login.png";
 import { useRouter } from "next/navigation";
 
+
 const LogIn = () => {
+  const { setAuth } = useContext(AuthContext);
   const userRef:any = useRef();
 
   const [email, setEmail] = useState("");
@@ -28,7 +31,7 @@ const LogIn = () => {
         method: 'POST',
         headers: {'Content-Type': 'application/json',},
         body: JSON.stringify({ email: email, password: password }),
-      });
+      })
       console.log(response);
       if (!response.ok) {
         if (!response) {
@@ -42,7 +45,10 @@ const LogIn = () => {
         }
         return;
       }
-      console.log("Login successful")
+      const json_response = await response.json();
+      console.log(`${json_response.message}`);
+      const jwtToken = json_response.jwt;
+      setAuth({email, jwtToken});
       router.push("/");
     } catch (err:any) {
       console.error('LOGIN ERROR:', err.message);
