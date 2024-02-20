@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "../context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <head></head>
       <body>
         <Navbar />
-        <main className={inter.className}>{children}</main>
+          <AuthProvider>
+            <main className={inter.className}>{children}</main>
+          </AuthProvider>
         <Footer />
       </body>
     </html>
