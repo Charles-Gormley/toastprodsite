@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 import HeroImg from "../../assets/placeholder_signup.png";
 import { useState, useEffect } from "react";
 
@@ -19,7 +20,7 @@ const SignUp = () => {
   const [errMsg, setErrMsg] = useState('');
 
   const [errorsPresent, setErrorsPresent] = useState(false);
-  
+
   useEffect(() => {
     if (emailErr || passwordErrMessage || matchPasswordErrMessage) {
       setErrorsPresent(true);
@@ -78,6 +79,7 @@ const SignUp = () => {
     }
   }
 
+  const router = useRouter()
   async function handleSubmit(e:any) {
     e.preventDefault()
     // if button enabled with JS hack
@@ -102,6 +104,9 @@ const SignUp = () => {
       //const data = await response.json();
       console.log(response); 
       // *****Handle response data here*****
+
+      router.push(`/verification/${email}`);
+      
     } catch (error:any) {
       console.error('Error signing up user:', error.message);
     }
