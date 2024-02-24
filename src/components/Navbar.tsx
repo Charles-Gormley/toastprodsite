@@ -7,6 +7,7 @@ import logo from "../assets/logo.svg";
 import { Covered_By_Your_Grace } from "next/font/google";
 
 const covered_by_your_grace = Covered_By_Your_Grace({
+  family: 'Helvetica Neue',
   weight: ['400'],
   style: ['normal'],
   subsets: ['latin']
@@ -32,7 +33,8 @@ const NavBar: React.FC = () => {
         height={40}
         className="dark:filter dark:invert"
       />
-      <h1 className={classNameVar}>Pilot</h1>
+      
+      <h1>    Pilot</h1>
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="md:hidden px-2 py-1 border rounded text-gray-900 dark:text-white"
