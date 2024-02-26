@@ -4,6 +4,10 @@ import MediaButtons from "@/components/MediaButtons";
 import Player from "@madzadev/audio-player";
 import "@madzadev/audio-player/dist/index.css";
 
+// TODO: Complete redesign.
+
+// TODO: Grab 
+
 export default function PodcastPlayer() {
   const colors = {
     playerBackground: "#d1d5db",

@@ -50,6 +50,7 @@ const LogIn = () => {
       const jwtToken = json_response.jwt;
       setAuth({email, jwtToken}); // TODO: This is a point of failure
       setCookie('jwt-token', jwtToken); // TODO: This is a point of failure
+      setCookie('email', email); // TODO: This is a point of failure
       router.push("/podcast");
     } catch (err:any) {
       console.error('LOGIN ERROR:', err.message);
