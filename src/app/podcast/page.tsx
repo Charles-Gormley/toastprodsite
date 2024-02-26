@@ -30,7 +30,7 @@ const tones = [
   "Sarcastic",
 ];
 
-const hosts = ["Carl", "Laura"];
+const hosts = ["Carl", "Luna"];
 
 interface TopicButtonProps {
   label: string;
@@ -139,6 +139,9 @@ const NewsInterests: React.FC<{}> = () => {
                      "character": selectedHost, 
                      "tone": selectedTone};
     console.log('payload', payload);
+
+    setCookie('character', selectedHost);
+    setCookie('tone', selectedTone);
     
     try {
       const response = await fetch(url, {
@@ -163,7 +166,7 @@ const NewsInterests: React.FC<{}> = () => {
       }
 
       if (response.ok) {
-        const jsonResponse = await response.json();
+        const jsonResponse = await response.json(); 
         console.log('response', jsonResponse);
         
         router.push('/podcast_player')

@@ -15,6 +15,7 @@ const covered_by_your_grace = Covered_By_Your_Grace({
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // TODO: Fix the mutliple login bug.
 
   const tabs = [
     ["/", "Home"],
