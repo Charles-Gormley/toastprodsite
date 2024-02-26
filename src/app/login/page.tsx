@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 import Link from "next/link";
+import { getCookie, setCookie } from "/src/components/cookies.tsx";
 import HeroImg from "../../assets/placeholder_login.png";
 import { useRouter } from "next/navigation";
-
 
 const LogIn = () => {
   const { setAuth } = useContext(AuthContext);
@@ -48,8 +48,10 @@ const LogIn = () => {
       const json_response = await response.json();
       console.log(`${json_response.message}`);
       const jwtToken = json_response.jwt;
-      setAuth({email, jwtToken});
-      router.push("/");
+      setAuth({email, jwtToken}); // TODO: This is a point of failure
+      setCookie('jwt-token', jwtToken); // TODO: This is a point of failure
+      setCookie('email', email); // TODO: This is a point of failure
+      router.push("/podcast");
     } catch (err:any) {
       console.error('LOGIN ERROR:', err.message);
       setErrMsg('An error occurred. Please try again later.');

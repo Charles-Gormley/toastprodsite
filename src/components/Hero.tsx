@@ -1,12 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import heroImage from "../assets/heroImg.png";
+import heroImage from "../assets/placeholder_login.png";
 import Container from "./Container";
 
 interface HeroSectionProps {
   title?: string;
   subtitle?: string;
 }
+
+//TODO:  Make this a 3d model 
+//TODO: Chage the Marketing Copy and have it be alternating.
 
 const HeroSection = ({ title, subtitle }: HeroSectionProps) => {
   return (
