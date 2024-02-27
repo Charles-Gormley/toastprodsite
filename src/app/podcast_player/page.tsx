@@ -6,14 +6,18 @@ import "@madzadev/audio-player/dist/index.css";
 import { getCookie, setCookie } from "/src/components/cookies.tsx";
 import { LinkedList } from "/src/components/LinkedList.tsx";
 
+// TODO: Fix Next button, if you click it multiple times it will fail. 
 
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useState, useRef } from 'react';
+import { create } from "domain";
+import { parse } from "path";
 
 // TODO: Complete redesign.(CSS) 
-// TODO: Grab the podcast data from the server. [ Done]
-// TODO: Grab the podcast data of the current user. [ Done ] 
 // TODO: Better Audio Bar Design. 
-// TODO: Podcast Previews on the side. 
+
+
+// TODO: Content Preview
 // TODO: Next Podcast Call with the next button being pressed or the next podcasts starting to play.
 
 // Architectural Pattern for the Podcast Player.
@@ -28,6 +32,11 @@ import React, { useEffect, useState } from 'react';
 // 6. 
 
 const base = "https://api.tokenizedtoast.com/";
+const ceilIndex = 100000 // arbitrary large number.
+let maxIndex = ceilIndex; // iniitalize maxIndex to the ceilIndex.
+let lastSegmentIndex = -1; // last segment index that was played.
+
+// TODO: We need Automatic Next Button
 
 
 // Audio Player
@@ -38,7 +47,9 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = () => {
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
   const [podcastIndex, setPodcastIndex] = useState('intro');
+  var [content_preview, setContentPreview] = useState<Record<string, string>  | null>(null);
   
+  const audioPlayerRef = useRef<HTMLAudioElement>(null);
 
   // Previous Podcast Index
   const previousPodcastIndex = () => {
@@ -48,34 +59,125 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     }
   };
 
+  async function getPodcastPreview(podcastIndex: string): Promise<Record<string, string>> {
+    const previewUrl = `${base}podcast-preview/`;
+    const email = getCookie("email");
+    const jwt = getCookie("jwt-token");
+
+    const payload = {
+      email: email, // Ensure this matches your cookie structure
+      jwt: jwt,
+      podcast_index: podcastIndex
+    };
+
+    try {
+      const response = await fetch(previewUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        // Getting Presigned S3 URL
+        const jsonResponse = await response.json();
+        console.log('get segment response', jsonResponse);
+
+        const podcastPreview = jsonResponse.podcast_preview;
+        return podcastPreview; // {topic, content_preview_title, script, source}
+      }
+      else {
+        console.error("Failed to load audio");
+        return {"Status": "Failed"};
+        // TODO: Add Error Handling
+      }
+    }
+    catch {
+      console.error("Error fetching audio");
+      return {"Status": "Failed"};
+      // TODO: Add Error Handling
+    }
+  }
+
+  // promose integer 
+  async function createNextSegment(curIndex: string): Promise<number> {
+    const nextSegUrl = `${base}create-next-segment/`;
+    const email = getCookie("email");
+    const jwt = getCookie("jwt-token");
+    const character = getCookie("character");
+    const tone = getCookie("tone");
+
+    const payload = {
+      email: email,
+      jwt: jwt,
+      character: character,
+      tone: tone
+    };
+
+    try {
+      const nexSegResponse = await fetch(nextSegUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      });
+      console.log(nexSegResponse + "Next Segment Response");
+      return nexSegResponse.status;
+    } catch {
+      // Rate Limit Error. // TODO: Rate Limit Bug🪲
+      console.error("Error fetching next segment");
+      return 429;
+    }
+  }
+
   // Next Podcast Index
   const nextPodcastIndex = () => {
-    if (podcastIndex === 'intro') {
-      // TODO: Call the next segment api endpoint
-      // TODO: If this call fails ( we hit the rate limit for the day ) This will be the max index.
-      // try{
-      //   // TODO: Next segment api call
-      // }
-      // catch{
-      //   // TODO: maxindex = 5; // set maxIndex to near 
-      // }
-      // TODO: (Optional): Would be nice to have that next segment is only 
+    if (String(podcastIndex) === String(maxIndex)) {
+      // If this is the case then we need to error out.
+      console.error("Max Index Reached");
+      // TODO: Set error here. 
+      return; 
+    }
 
-      // API for Next Segment Creation
-      // app.post('/create-next-segment/', async (req, res) => {
-      //   const { email, jwt, character, tone} = req.body; // TODO: grab character and tone from the cookie.
-      //   const user_id = getUserID(email);
+    else{
+      if (podcastIndex === 'intro') {
+        lastSegmentIndex = 0;
+        setPodcastIndex(String(lastSegmentIndex));
+      }
+      else {
+        if (parseInt(podcastIndex) === lastSegmentIndex) { // if the podcastIndex is the last one generated then we can generated the next segment. 
+            // If the podcast is not the intro try to start generating the next segment.
+            lastSegmentIndex += 1;
+            setPodcastIndex(String(lastSegmentIndex));
 
-      //   const next_segment_response = await createNextPodcastSegment(user_id, jwt, character, tone);
+            if (maxIndex === ceilIndex) { // Meaning we have found the limit, and we can stop generating new segments.
 
-      //   return res.status(next_segment_response.status_code).json(next_segment_response);
-      // });
-
-      setPodcastIndex('0');
-    } else {
-      const newIndex = Math.min(parseInt(podcastIndex) + 1).toString();
-      setPodcastIndex(newIndex);
-      
+              const responsePromise = createNextSegment(podcastIndex);
+              responsePromise.then(response => {
+                if (response === 429) { // We hit the rate limit, stop generating new segments.
+                  maxIndex = parseInt(podcastIndex) + 2;
+                  console.log("Rate Limit Hit");
+                  return;
+                }
+                if (response <= 299 && String(lastSegmentIndex) === podcastIndex) {
+                    
+                }
+              });
+            }
+            else {
+              if (lastSegmentIndex === maxIndex) {
+                console.log("Max Index Reached");
+                return;
+              }
+            }
+        }
+        else {
+          setPodcastIndex(String(parseInt(podcastIndex) + 1));
+          return;
+        }
+      }
     }
   };
 
@@ -109,12 +211,19 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
 
         const stream_url = jsonResponse.url;
         console.log('url', stream_url);
+        
+        if (podcastIndex !== 'intro') {
+          content_preview = await getPodcastPreview(podcastIndex);
+          setContentPreview(content_preview);
+        }
+
 
         setAudioSrc(stream_url);
       }
       else {
         console.error("Failed to load audio");
         // Display Error onto the screen.
+        // TODO: Add Error Handling
       }
     }
     catch { 
@@ -123,20 +232,47 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
       // Display Error onto the screen.
     }
   }
+
   useEffect(() => {
     streamAudio(podcastIndex);
+    const player = audioPlayerRef.current;
+    if (player) {
+      const handleAudioEnd = () => nextPodcastIndex();
+      player.addEventListener('ended', handleAudioEnd);
+
+      // Cleanup function to remove event listener
+      return () => player.removeEventListener('ended', handleAudioEnd);
+    }
   }, [podcastIndex]);
 
-  return (
-    <div>
-      <audio id="audioPlayer" controls src={audioSrc}></audio>
-      <div>
-        <button onClick={previousPodcastIndex}>Previous</button>
-        <button onClick={nextPodcastIndex}>Next</button>
-      </div>
-    </div>
-  );
-}
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <div>
+          <h1>{content_preview?.content_preview_title}</h1>
+          <p>{content_preview?.script}</p>
+        </div>
+        
+        
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'fixed', bottom: '10px', width: '90%', background: '#fff'}}>
+                <div>  
+                  <button onClick={previousPodcastIndex}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+                    </svg>
+                  </button>
+                </div>
+                <audio style={{ width: '80%', margin: 'auto' }} id="audioPlayer" ref={audioPlayerRef} autoPlay controls src={audioSrc}></audio>
+                <div>
+                  <button onClick={nextPodcastIndex}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
+                    </svg>
+                  </button>
+                </div>
+                </div>
+              </div>
+          );
+        }
 
 
 
