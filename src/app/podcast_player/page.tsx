@@ -8,12 +8,14 @@ import { LinkedList } from "/src/components/LinkedList.tsx";
 
 
 import React, { useEffect, useState } from 'react';
+import { create } from "domain";
+import { parse } from "path";
 
 // TODO: Complete redesign.(CSS) 
-// TODO: Grab the podcast data from the server. [ Done]
-// TODO: Grab the podcast data of the current user. [ Done ] 
 // TODO: Better Audio Bar Design. 
-// TODO: Podcast Previews on the side. 
+
+
+// TODO: Content Preview
 // TODO: Next Podcast Call with the next button being pressed or the next podcasts starting to play.
 
 // Architectural Pattern for the Podcast Player.
@@ -28,6 +30,12 @@ import React, { useEffect, useState } from 'react';
 // 6. 
 
 const base = "https://api.tokenizedtoast.com/";
+const ceilIndex = 100000 // arbitrary large number.
+let maxIndex = ceilIndex; // iniitalize maxIndex to the ceilIndex.
+let lastSegmentIndex = -1; // last segment index that was played.
+
+// TODO: We need Automatic Next Button
+// TODO: Call Content Preview.
 
 
 // Audio Player
@@ -48,34 +56,120 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     }
   };
 
+  async function getSegment(podcastIndex: string) {
+    const previewUrl = `${base}podcast-preview/`;
+    const email = getCookie("email");
+    const jwt = getCookie("jwt-token");
+
+    const payload = {
+      email: email, // Ensure this matches your cookie structure
+      jwt: jwt,
+      podcast_index: podcastIndex
+    };
+
+    try {
+      const response = await fetch(previewUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        // Getting Presigned S3 URL
+        const jsonResponse = await response.json();
+        console.log('get segment response', jsonResponse);
+        
+        // TODO: To obtain the body of the response
+      }
+      else {
+        console.error("Failed to load audio");
+      }
+    }
+    catch {
+      console.error("Error fetching audio");
+    }
+  }
+
+  // promose integer 
+  async function createNextSegment(curIndex: string): Promise<number> {
+    const nextSegUrl = `${base}create-next-segment/`;
+    const email = getCookie("email");
+    const jwt = getCookie("jwt-token");
+    const character = getCookie("character");
+    const tone = getCookie("tone");
+
+    const payload = {
+      email: email,
+      jwt: jwt,
+      character: character,
+      tone: tone
+    };
+
+    try {
+      const nexSegResponse = await fetch(nextSegUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      });
+      console.log(nexSegResponse + "Next Segment Response");
+      return nexSegResponse.status;
+    } catch {
+      // Rate Limit Error. // TODO: Rate Limit Bug🪲
+      console.error("Error fetching next segment");
+      return 429;
+    }
+  }
+
   // Next Podcast Index
   const nextPodcastIndex = () => {
-    if (podcastIndex === 'intro') {
-      // TODO: Call the next segment api endpoint
-      // TODO: If this call fails ( we hit the rate limit for the day ) This will be the max index.
-      // try{
-      //   // TODO: Next segment api call
-      // }
-      // catch{
-      //   // TODO: maxindex = 5; // set maxIndex to near 
-      // }
-      // TODO: (Optional): Would be nice to have that next segment is only 
+    if (String(podcastIndex) === String(maxIndex)) {
+      // If this is the case then we need to error out.
+      console.error("Max Index Reached");
+      // TODO: Set error here. 
+      return; 
+    }
 
-      // API for Next Segment Creation
-      // app.post('/create-next-segment/', async (req, res) => {
-      //   const { email, jwt, character, tone} = req.body; // TODO: grab character and tone from the cookie.
-      //   const user_id = getUserID(email);
+    else{
+      if (podcastIndex === 'intro') {
+        lastSegmentIndex = 0;
+        setPodcastIndex(String(lastSegmentIndex));
+      }
+      else {
+        if (parseInt(podcastIndex) === lastSegmentIndex) { // if the podcastIndex is the last one generated then we can generated the next segment. 
+            // If the podcast is not the intro try to start generating the next segment.
+            lastSegmentIndex += 1;
+            setPodcastIndex(String(lastSegmentIndex));
 
-      //   const next_segment_response = await createNextPodcastSegment(user_id, jwt, character, tone);
+            if (maxIndex === ceilIndex) { // Meaning we have found the limit, and we can stop generating new segments.
 
-      //   return res.status(next_segment_response.status_code).json(next_segment_response);
-      // });
-
-      setPodcastIndex('0');
-    } else {
-      const newIndex = Math.min(parseInt(podcastIndex) + 1).toString();
-      setPodcastIndex(newIndex);
-      
+              const responsePromise = createNextSegment(podcastIndex);
+              responsePromise.then(response => {
+                if (response === 429) { // We hit the rate limit, stop generating new segments.
+                  maxIndex = parseInt(podcastIndex) + 2;
+                  console.log("Rate Limit Hit");
+                  return;
+                }
+                if (response <= 299 && String(lastSegmentIndex) === podcastIndex) {
+                    
+                }
+              });
+            }
+            else {
+              if (lastSegmentIndex === maxIndex) {
+                console.log("Max Index Reached");
+                return;
+              }
+            }
+        }
+        else {
+          setPodcastIndex(String(parseInt(podcastIndex) + 1));
+          return;
+        }
+      }
     }
   };
 
