@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 // Import cookie
 import { getCookie, setCookie } from "/src/components/cookies.tsx";
+import LoadingOverlay from "../../components/LoadingOverlay.tsx";
 
 // TODO: Have an audio preview for the tts voices.
 // TODO: Create Voice Cards for the different voices.
@@ -360,7 +361,7 @@ const NewsInterests: React.FC<{}> = () => {
       </div>
       <div className="flex justify-center mt-6">
         {showLoading && (
-          <span className="loading loading-spinner loading-lg"></span>
+          <LoadingOverlay />
         )}
       </div>
     </div>
