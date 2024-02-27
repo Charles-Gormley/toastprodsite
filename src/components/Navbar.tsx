@@ -24,6 +24,9 @@ const NavBar: React.FC = () => {
 
   let classNameVar = `${covered_by_your_grace.className} text-5xl ml-4`
   
+  // TODO: Make the subscript actually a subscript 
+
+  
   return (
     <nav className="flex items-center justify-between py-4 px-6 bg-white dark:bg-gray-900 relative">
       <Image
@@ -34,7 +37,6 @@ const NavBar: React.FC = () => {
         className="dark:filter dark:invert"
       />
 
-      // TODO: Make the subscript actually a subscript 
       <h1>Tokenized Toast <sub className={classNameVar}>Pilot</sub></h1>
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
