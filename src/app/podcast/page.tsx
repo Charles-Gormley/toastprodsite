@@ -22,35 +22,26 @@ const basicTopics = [
   "Geopolitics 🌐",
 ];
 
-<<<<<<< HEAD
-=======
-const basicTopicsMap = {
-  "Finance 💰": [
+const basicTopicDict = {
+  "Finance 💰":
     "macroeconomics, microeconomics, savings, stocks, bonds, inflation, interest rates, monetary policy, fiscal policy, exchange rates, GDP, unemployment rate, public debt, balance of payments, financial markets, investment, capital flows, economic growth, recession, deflation, central banking, financial regulation, asset management, risk management, currency, commodities, derivatives, financial planning, taxation",
-  ],
-  "Politics 🏛️": [
+  "Politics 🏛️":
     "democracy, autocracy, socialism, capitalism, communism, federalism, anarchism, oligarchy, nationalism, liberalism, conservatism, populism, totalitarianism, diplomacy, geopolitics, electoral system, political party, civil rights, legislation, executive branch, legislative branch, judicial branch, constitution, separation of powers, checks and balances, public policy, political campaign, international relations, human rights, governance, political economy, lobbying, activism, referendum, treaty, political ideology, political philosophy, state sovereignty, political science, voting system, political culture, political corruption, civil society",
-  ],
-  "Health 💊": [
+  "Health 💊":
     "nutrition, mental health, exercise and fitness, chronic diseases, infectious diseases, preventive healthcare, public health policy, healthcare systems, medical ethics, epidemiology, vaccination, mental disorders, stress management, occupational health, environmental health, sexual health, substance abuse, health education, alternative medicine, pediatrics, geriatrics, women's health, men's health, global health issues, telemedicine, health informatics, nutrition and dietetics, surgical procedures, pharmacology, physical therapy, dental health, dermatology, cardiology, oncology, neurology, psychiatry, obstetrics and gynecology, endocrinology, immunology, health insurance, health disparities, pandemic response, first aid and emergency care, reproductive health, health and wellness technology",
-  ],
-  "Research 🔬": [
+  "Research 🔬":
     "Artificial Intelligence and Machine Learning, Quantum Computing, Sustainable Energy Technologies, Biotechnology and Genetic Engineering, Nanotechnology, Environmental Science and Climate Change, Robotics and Automation, Data Science, Big Data Analytics, Cybersecurity and Information Security, Materials Science and Engineering, Aerospace Engineering, Neuroscience and Brain-Computer Interfaces, 3D Printing, Additive Manufacturing, Theoretical Physics and Cosmology, Chemical Engineering, Renewable Energy Sources and Storage, Bioinformatics and Computational Biology, Virtual Reality (VR) and Augmented Reality (AR), Internet of Things (IoT) and Smart Technologies, Stem Cell Research and Regenerative Medicine, Marine Biology and Oceanography, Geospatial Technologies and Remote Sensing, Astrophysics and Space Exploration, Mechanical Engineering and Dynamics, Agricultural Sciences and Food Security, Earthquake Engineering and Seismic Risk Reduction, Pharmacology and Drug Discovery, Mathematical Modeling and Simulation, Biochemistry and Molecular Biology, Civil Engineering and Infrastructure Resilience, Wireless Communications and Networking, Environmental Health and Toxicology, Cognitive Science, Meteorology, Water Resources Engineering, Optics and Photonics, Epidemiology and Public Health, Genomics, Personalized Medicine, Clean Technology, Digital Humanities",
-  ],
-  "Technology 💻": [
+  "Technology 💻":
     "Cloud Computing, Cybersecurity and Ethical Hacking, Data Science and Analytics, Artificial Intelligence and Machine Learning, Blockchain Technology, Internet of Things (IoT), Augmented Reality (AR) and Virtual Reality (VR), Software Development Methodologies, Mobile App Development, Web Development Technologies, Quantum Computing, User Experience (UX) and User Interface (UI) Design, Networking and Communications, Big Data Technologies, Robotics and Automation, 3D Printing and Additive Manufacturing, Wearable Technology, Smart Home Technologies, Digital Marketing and SEO, E-commerce Platforms and Technologies, Game Development and Design, Database Management Systems, Computer Graphics and Animation, Cyber-Physical Systems, Voice and Speech Recognition Technologies, Energy-Efficient Computing, Biometric Technology, Edge Computing, Open Source Software and Development, Information Security and Privacy, Computer Vision and Pattern Recognition, Distributed Systems and Computing, Fintech and Financial Technologies, Healthcare IT and Telemedicine, Educational Technology and E-learning, Green Technology and Sustainability in IT, Autonomous Vehicles and Drones, Social Media Technologies and Trends, Digital Transformation Strategies, High-Performance Computing, Nanotechnology, Technology Policy and Ethics",
-  ],
-  "Business 🏢": [
+  "Business 🏢":
     "Business Strategy and Planning, Marketing Strategies and Consumer Behavior, Financial Management and Accounting, Human Resources Management, Operations Management, Supply Chain and Logistics, Entrepreneurship and Startup Culture, International Business and Global Markets, Business Ethics and Corporate Social Responsibility, E-commerce and Digital Business, Innovation and Product Development, Project Management, Leadership and Organizational Behavior, Management Information Systems, Business Analytics and Data Analysis, Customer Relationship Management, Corporate Finance and Investment, Risk Management and Insurance, Real Estate and Property Management, Sales and Business Development, Business Law and Legal Issues, Corporate Governance, Public Relations and Corporate Communication, Brand Management and Branding Strategies, Sustainable Business Practices and Green Business, Small Business Management and SMEs, Negotiation and Conflict Resolution, Business Intelligence and Competitive Analysis, Retail Management and Merchandising, Family Business Management, Business Education and Training, Franchising and Chain Store Operations, Event Management and Event Planning, Hospitality Management and Tourism, Healthcare Management, Nonprofit Organizations and Social Enterprise, Business Process Outsourcing, Mergers and Acquisitions, Private Equity and Venture Capital, Corporate Restructuring and Turnaround, International Trade and Export, Crisis Management, Intellectual Property in Business, Fintech and Financial Technologies, Agribusiness and Food Industry Management, Sports Management, Entertainment and Media Management, Technology Management, Public Sector Management and Government Business Relations",
-  ],
-  "Legal ⚖️": [
+  "Legal ⚖️":
     "Constitutional Law, Criminal Law, Civil Rights, Corporate Law, Intellectual Property Rights, Labor and Employment Law, Environmental Law, Family Law, Real Estate Law, Tax Law, Contract Law, Tort Law, International Law, Administrative Law, Securities Law, Bankruptcy Law, Immigration Law, Health Law, Education Law, Estate Planning and Probate, Antitrust Law, Competition Law, Consumer Protection Law, Cyber Law and Internet Regulation, Human Rights Law, Insurance Law, Maritime Law, Sports Law, Entertainment Law, Legal Ethics and Professional Responsibility, Dispute Resolution and Arbitration, Litigation, Criminal Procedure, Evidence Law, Legal Theory and Jurisprudence, Comparative Law, Legal History, Patent Law, Trademark Law, Copyright Law, Trade Secret Law, Product Liability Law, Public International Law, Private International Law, Space Law, Animal Law, Energy Law, Food and Drug Law, Housing Law, Juvenile Law, Military Law, Native American Law, Public Health Law, Transportation Law",
-  ],
-  "Geopolitics 🌐": [
+  "Geopolitics 🌐":
     "Global Power Dynamics, International Relations and Diplomacy, Conflict and Peace Studies, Geopolitical Theories and Strategies, Economic Sanctions and Trade Wars, Energy Security and Natural Resources, Territorial Disputes and Border Conflicts, Globalization and its Impacts, Regional Powers and Regional Alliances, Military Strategies and Defense Policies, Intelligence and Cybersecurity, Climate Change and Environmental Politics, Maritime Security and Naval Strategy, Space Politics and Outer Space Treaties, Cultural Diplomacy and Soft Power, Non-State Actors and Transnational Issues, Nuclear Proliferation and Arms Control, Humanitarian Interventions and International Law, Economic Development and Geopolitical Influence, Political Geography and Critical Geopolitics, Cyber Warfare and Information Warfare, Global Governance and International Organizations, Migration and Border Security, Political Economy and Trade Agreements, Democracy and Authoritarianism in World Politics, Terrorism and Counterterrorism Strategies, Propaganda and Media Influence in Geopolitics, Emerging Technologies and Geopolitical Competition, Pandemics and Global Health Security, Geopolitical Risk Analysis and Forecasting, Post-Colonialism and Neo-Colonialism, Geopolitical History and Historical Disputes, Nation-State Building and Nationalism, Ethnic Conflicts and Sectarian Violence, Proxy Wars and Foreign Interventions, Geopolitical Modeling and Simulation, Global Supply Chains and Economic Interdependence, Crisis Management and Conflict Resolution, Political Demography and Population Dynamics, Strategic Resources and Commodities Markets, Geopolitical Education and Analytical Frameworks, International Norms and Global Order",
-  ],
 };
->>>>>>> 69bcf511f9d495df84844cfcd23e929c3da7d980
+
+const basicTopicsMap = new Map<string, string> (Object.entries(basicTopicDict));
 
 const tones = [
   "Business Casual",
@@ -289,9 +280,9 @@ const NewsInterests: React.FC<{}> = () => {
               key={topic}
               label={topic}
               onClick={() => {
-                handleBasicTopicClick(topic);
+                handleBasicTopicClick(basicTopicsMap.get(topic) || "");
               }}
-              isSelected={selectedBasicTopics.includes(topic)}
+              isSelected={selectedBasicTopics.includes(basicTopicsMap.get(topic) || "")}
             />
           ))}
         </div>
