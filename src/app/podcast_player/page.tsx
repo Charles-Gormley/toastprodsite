@@ -223,7 +223,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
 
   return (
     <div>
-      <audio id="audioPlayer" controls src={audioSrc}></audio>
+      <audio id="audioPlayer" controls src={audioSrc}></audio> // TODO: If its done, it'll be event. 
       <div>
         <button onClick={previousPodcastIndex}>Previous</button>
         <button onClick={nextPodcastIndex}>Next</button>
