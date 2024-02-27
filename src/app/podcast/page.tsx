@@ -21,6 +21,7 @@ const basicTopics = [
   "Geopolitics 🌐",
 ];
 
+
 const tones = [
   "Business Casual",
   "Informative",

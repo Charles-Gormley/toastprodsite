@@ -245,21 +245,34 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     }
   }, [podcastIndex]);
 
-  return (
-    <div>
-      <audio id="audioPlayer" ref={audioPlayerRef} autoPlay controls src={audioSrc}></audio> // TODO: If its done, it'll be event. 
-      
-      <div>
-        <h1>{content_preview?.content_preview_title}</h1>
-        <p>{content_preview?.script}</p>
-      </div>
-      <div>
-        <button onClick={previousPodcastIndex}>Previous</button>
-        <button onClick={nextPodcastIndex}>Next</button>
-      </div>
-    </div>
-  );
-}
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <div>
+          <h1>{content_preview?.content_preview_title}</h1>
+          <p>{content_preview?.script}</p>
+        </div>
+        
+        
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'fixed', bottom: '10px', width: '90%', background: '#fff'}}>
+                <div>  
+                  <button onClick={previousPodcastIndex}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+                    </svg>
+                  </button>
+                </div>
+                <audio style={{ width: '80%', margin: 'auto' }} id="audioPlayer" ref={audioPlayerRef} autoPlay controls src={audioSrc}></audio>
+                <div>
+                  <button onClick={nextPodcastIndex}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
+                    </svg>
+                  </button>
+                </div>
+                </div>
+              </div>
+          );
+        }
 
 
 
