@@ -60,6 +60,8 @@ const basicTopicDict = {
     "Constitutional Law, Criminal Law, Civil Rights, Corporate Law, Intellectual Property Rights, Labor and Employment Law, Environmental Law, Family Law, Real Estate Law, Tax Law, Contract Law, Tort Law, International Law, Administrative Law, Securities Law, Bankruptcy Law, Immigration Law, Health Law, Education Law, Estate Planning and Probate, Antitrust Law, Competition Law, Consumer Protection Law, Cyber Law and Internet Regulation, Human Rights Law, Insurance Law, Maritime Law, Sports Law, Entertainment Law, Legal Ethics and Professional Responsibility, Dispute Resolution and Arbitration, Litigation, Criminal Procedure, Evidence Law, Legal Theory and Jurisprudence, Comparative Law, Legal History, Patent Law, Trademark Law, Copyright Law, Trade Secret Law, Product Liability Law, Public International Law, Private International Law, Space Law, Animal Law, Energy Law, Food and Drug Law, Housing Law, Juvenile Law, Military Law, Native American Law, Public Health Law, Transportation Law",
   "Geopolitics 🌐":
     "Global Power Dynamics, International Relations and Diplomacy, Conflict and Peace Studies, Geopolitical Theories and Strategies, Economic Sanctions and Trade Wars, Energy Security and Natural Resources, Territorial Disputes and Border Conflicts, Globalization and its Impacts, Regional Powers and Regional Alliances, Military Strategies and Defense Policies, Intelligence and Cybersecurity, Climate Change and Environmental Politics, Maritime Security and Naval Strategy, Space Politics and Outer Space Treaties, Cultural Diplomacy and Soft Power, Non-State Actors and Transnational Issues, Nuclear Proliferation and Arms Control, Humanitarian Interventions and International Law, Economic Development and Geopolitical Influence, Political Geography and Critical Geopolitics, Cyber Warfare and Information Warfare, Global Governance and International Organizations, Migration and Border Security, Political Economy and Trade Agreements, Democracy and Authoritarianism in World Politics, Terrorism and Counterterrorism Strategies, Propaganda and Media Influence in Geopolitics, Emerging Technologies and Geopolitical Competition, Pandemics and Global Health Security, Geopolitical Risk Analysis and Forecasting, Post-Colonialism and Neo-Colonialism, Geopolitical History and Historical Disputes, Nation-State Building and Nationalism, Ethnic Conflicts and Sectarian Violence, Proxy Wars and Foreign Interventions, Geopolitical Modeling and Simulation, Global Supply Chains and Economic Interdependence, Crisis Management and Conflict Resolution, Political Demography and Population Dynamics, Strategic Resources and Commodities Markets, Geopolitical Education and Analytical Frameworks, International Norms and Global Order",
+  "Advanced Topics":
+    "Advanced Topics"
 };
 
 const reversedDict = reverseKeyValuePairs(basicTopicDict);
@@ -287,7 +289,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     <div className="flex flex-col justify-center items-center min-h-screen px-4 lg:px-8">
       <div className="max-w-4xl w-full">
         <p className="inline-block px-3 py-1 border border-gray-300 text-sm text-gray-700 bg-gray-100 rounded-full mb-4">
-          {reversedMap.get(content_preview?.topic || "")}
+          {reversedMap.get(content_preview?.topic || "Advanced Topics")}
         </p>
         <h1 className="text-2xl font-semibold text-gray-900 mt-4 mb-4">
           {content_preview?.content_preview_title}
