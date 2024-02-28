@@ -27,11 +27,12 @@ import { useRouter } from "next/navigation";
 // 4. When intro is done grab the next segment. ( Develop this a linked list of segments.)
 // 5. When the next segment is done grab the next segment.
 
-
-const reverseKeyValuePairs = (inputDict: { [key: string]: string }): { [key: string]: string } => {
+const reverseKeyValuePairs = (inputDict: {
+  [key: string]: string;
+}): { [key: string]: string } => {
   const reversedMap: { [key: string]: string } = {};
 
-  Object.keys(inputDict).forEach(key => {
+  Object.keys(inputDict).forEach((key) => {
     const value = inputDict[key];
     reversedMap[value] = key;
   });
@@ -62,8 +63,7 @@ const basicTopicDict = {
 
 const reversedDict = reverseKeyValuePairs(basicTopicDict);
 
-const reversedMap = new Map<string, string> (Object.entries(reversedDict));
-
+const reversedMap = new Map<string, string>(Object.entries(reversedDict));
 
 const base = "https://api.tokenizedtoast.com/";
 const ceilIndex = 100000; // arbitrary large number.
@@ -318,6 +318,21 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     }
   }, [podcastIndex]);
 
+  function splitTextIntoParagraphs(text: string): string[] {
+    const regexPattern = /(?<!\b(?:[A-Z]\.){1,}[A-Z]?)\.\s+(?=[A-Z])|\.(?=$)/g;
+    const sentences = text.split(regexPattern);
+
+    const paragraphs: string[] = [];
+    for (let i = 0; i < sentences.length; i += 4) {
+      const paragraphSentences = sentences.slice(i, i + 4);
+
+      paragraphs.push(paragraphSentences.join(" "));
+    }
+
+    return paragraphs;
+  }
+
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen px-4 lg:px-8">
      
@@ -341,9 +356,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
         <h1 className="text-2xl font-semibold text-gray-900 mt-4 mb-4">
           {content_preview?.content_preview_title}
         </h1>
-        <p className="text-base text-gray-700 mb-8">
-          {content_preview?.script}
-        </p>
+        {splitTextIntoParagraphs(content_preview?.script || "").map((paragraph, index) => (
+          <p key={index} className="text-base text-gray-700 mb-8">
+            {paragraph}
+          </p>
+        ))}
         <hr className="my-4 border-gray-300" />
         <p className="text-sm text-gray-500">
           Source:{" "}

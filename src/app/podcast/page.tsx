@@ -4,8 +4,8 @@ import React, { useState, KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
 
 // Import cookie
-import { getCookie, setCookie } from "/src/components/cookies.tsx";
-import LoadingOverlay from "../../components/LoadingOverlay.tsx";
+import { getCookie, setCookie } from "../../components/cookies";
+import LoadingOverlay from "../../components/LoadingOverlay";
 
 // TODO: Have an audio preview for the tts voices.
 // TODO: Create Voice Cards for the different voices.
