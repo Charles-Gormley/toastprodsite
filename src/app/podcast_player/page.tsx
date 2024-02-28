@@ -7,7 +7,6 @@ import { getCookie, setCookie } from "/src/components/cookies.tsx";
 import { LinkedList } from "/src/components/LinkedList.tsx";
 // import basicTopicDict from "../podcast/page";
 
-
 // TODO: Fix Next button, if you click it multiple times it will fail.
 
 import React, { useEffect, useState, useRef } from "react";
@@ -31,11 +30,12 @@ import { parse } from "path";
 // 5. When the next segment is done grab the next segment.
 // 6.
 
-
-const reverseKeyValuePairs = (inputDict: { [key: string]: string }): { [key: string]: string } => {
+const reverseKeyValuePairs = (inputDict: {
+  [key: string]: string;
+}): { [key: string]: string } => {
   const reversedMap: { [key: string]: string } = {};
 
-  Object.keys(inputDict).forEach(key => {
+  Object.keys(inputDict).forEach((key) => {
     const value = inputDict[key];
     reversedMap[value] = key;
   });
@@ -60,15 +60,15 @@ const basicTopicDict = {
     "Constitutional Law, Criminal Law, Civil Rights, Corporate Law, Intellectual Property Rights, Labor and Employment Law, Environmental Law, Family Law, Real Estate Law, Tax Law, Contract Law, Tort Law, International Law, Administrative Law, Securities Law, Bankruptcy Law, Immigration Law, Health Law, Education Law, Estate Planning and Probate, Antitrust Law, Competition Law, Consumer Protection Law, Cyber Law and Internet Regulation, Human Rights Law, Insurance Law, Maritime Law, Sports Law, Entertainment Law, Legal Ethics and Professional Responsibility, Dispute Resolution and Arbitration, Litigation, Criminal Procedure, Evidence Law, Legal Theory and Jurisprudence, Comparative Law, Legal History, Patent Law, Trademark Law, Copyright Law, Trade Secret Law, Product Liability Law, Public International Law, Private International Law, Space Law, Animal Law, Energy Law, Food and Drug Law, Housing Law, Juvenile Law, Military Law, Native American Law, Public Health Law, Transportation Law",
   "Geopolitics 🌐":
     "Global Power Dynamics, International Relations and Diplomacy, Conflict and Peace Studies, Geopolitical Theories and Strategies, Economic Sanctions and Trade Wars, Energy Security and Natural Resources, Territorial Disputes and Border Conflicts, Globalization and its Impacts, Regional Powers and Regional Alliances, Military Strategies and Defense Policies, Intelligence and Cybersecurity, Climate Change and Environmental Politics, Maritime Security and Naval Strategy, Space Politics and Outer Space Treaties, Cultural Diplomacy and Soft Power, Non-State Actors and Transnational Issues, Nuclear Proliferation and Arms Control, Humanitarian Interventions and International Law, Economic Development and Geopolitical Influence, Political Geography and Critical Geopolitics, Cyber Warfare and Information Warfare, Global Governance and International Organizations, Migration and Border Security, Political Economy and Trade Agreements, Democracy and Authoritarianism in World Politics, Terrorism and Counterterrorism Strategies, Propaganda and Media Influence in Geopolitics, Emerging Technologies and Geopolitical Competition, Pandemics and Global Health Security, Geopolitical Risk Analysis and Forecasting, Post-Colonialism and Neo-Colonialism, Geopolitical History and Historical Disputes, Nation-State Building and Nationalism, Ethnic Conflicts and Sectarian Violence, Proxy Wars and Foreign Interventions, Geopolitical Modeling and Simulation, Global Supply Chains and Economic Interdependence, Crisis Management and Conflict Resolution, Political Demography and Population Dynamics, Strategic Resources and Commodities Markets, Geopolitical Education and Analytical Frameworks, International Norms and Global Order",
-  "Advanced Topics":
-    "Advanced Topics"
+  Sports:
+    "Olympics, FIFA World Cup, Mega-events, Soft power, Sportwashing, Nationalism, National identity, Doping, Boycotts, Sanctions, Diplomacy, Peacebuilding, International sports federations, NBA, Cricket, Soccer, Baseball, American football, Tennis, Hockey, Basketball, Volleyball, Athletics, Swimming, Cycling, Rugby, Golf, Formula 1, Athletes, Fans, Teams, Leagues, Competition, Training, Fitness, Coaching, Stadiums, Broadcasting, Media, Sponsorship, Betting, Fantasy sports, Esports, Paralympics, Gender equality, Sportsmanship, Anti-doping, Fair play, Officiating, Sports science, Technology in sports, Economic impact of sports, Social impact of sports, Sports history, Sports culture, Ethics in sports, Fan culture, Sports psychology, Fan engagement, Sustainability in sports, Athlete activism, Sports tourism, Youth sports, Community sports",
+  "Advanced Topics": "Advanced Topics",
 };
 
 const reversedDict = reverseKeyValuePairs(basicTopicDict);
 console.log("This is the reversedDict", reversedDict);
 
-const reversedMap = new Map<string, string> (Object.entries(reversedDict));
-
+const reversedMap = new Map<string, string>(Object.entries(reversedDict));
 
 const base = "https://api.tokenizedtoast.com/";
 const ceilIndex = 100000; // arbitrary large number.
@@ -285,6 +285,21 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     }
   }, [podcastIndex]);
 
+  function splitTextIntoParagraphs(text: string): string[] {
+    const regexPattern = /(?<!\b(?:[A-Z]\.){1,}[A-Z]?)\.\s+(?=[A-Z])|\.(?=$)/g;
+    const sentences = text.split(regexPattern);
+
+    const paragraphs: string[] = [];
+    for (let i = 0; i < sentences.length; i += 4) {
+      const paragraphSentences = sentences.slice(i, i + 4);
+
+      paragraphs.push(paragraphSentences.join(" "));
+    }
+
+    return paragraphs;
+  }
+
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen px-4 lg:px-8">
       <div className="max-w-4xl w-full">
@@ -294,9 +309,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
         <h1 className="text-2xl font-semibold text-gray-900 mt-4 mb-4">
           {content_preview?.content_preview_title}
         </h1>
-        <p className="text-base text-gray-700 mb-8">
-          {content_preview?.script}
-        </p>
+        {splitTextIntoParagraphs(content_preview?.script || "").map((paragraph, index) => (
+          <p key={index} className="text-base text-gray-700 mb-8">
+            {paragraph}
+          </p>
+        ))}
         <hr className="my-4 border-gray-300" />
         <p className="text-sm text-gray-500">
           Source:{" "}
