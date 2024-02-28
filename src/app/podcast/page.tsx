@@ -52,6 +52,10 @@ const tones = [
   "Sarcastic",
 ];
 
+function sleep(milliseconds: number) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
 const hosts = ["Carl", "Luna"];
 
 interface TopicButtonProps {
@@ -180,28 +184,40 @@ const NewsInterests: React.FC<{}> = () => {
         body: JSON.stringify(payload),
       });
 
+      const jsonResponse = await response.json();
+      console.log("Podcast Creation Response", response);
+      console.log("Podcast Creation JSON Response", jsonResponse);
+
       if (!response.ok) {
         if (response.status === 401) {
           setError(
             "You are an unathorized user. Please login or create an account :)"
           );
-        } else if (response.status === 403 || response.status === 404) {
+        } 
+        else if (response.status === 403 || response.status === 404) {
           setError(
             "Hmmm. seems like you haven'nt logged in for awhile or your session has expired. Please login again to enjoy the best podcasts on earth."
-          );
-        } else if (response.status >= 500) {
+          );  
+        } 
+        else if (response.status === 429){
+          setError("Congrats! You have generated all your podcast segments for the pilot! 🎊🥳💃. You are being redirected to the waitlist at https://tokenizedtoast.com/waitlist in 5 seconds. ")
+        
+          await sleep(5*1000);
+
+          router.push("/waitlist")
+        }
+        else if (response.status >= 500) {
           setError(
             "We are having some issues right now :( Please try again later. We'll email you when we're back up and running."
           );
-        } else {
+        } 
+        else {
           setError("An error occurred. Please try again later.");
         }
       }
 
       if (response.ok) {
-        const jsonResponse = await response.json();
-        console.log("response", jsonResponse);
-
+        console.log("Podcast creation successful.")
         router.push("/podcast_player");
       }
     } catch (error) {
@@ -258,11 +274,11 @@ const NewsInterests: React.FC<{}> = () => {
       {error && (
         <div
           style={{
-            backgroundColor: "red",
+            backgroundColor: "#8B0000",
             padding: "10px",
             marginBottom: "20px",
             borderRadius: "5px",
-            color: "#000",
+            color: "#fff",
           }}
         >
           {error}
@@ -381,7 +397,8 @@ const NewsInterests: React.FC<{}> = () => {
         </button>
       </div>
       <div className="flex justify-center mt-6">
-        {showLoading && <LoadingOverlay />}
+        
+        {showLoading && !error && <LoadingOverlay />}
       </div>
     </div>
   );

@@ -1,18 +1,15 @@
 "use client";
-
-import MediaButtons from "@/components/MediaButtons";
-import Player from "@madzadev/audio-player";
 import "@madzadev/audio-player/dist/index.css";
 import { getCookie, setCookie } from "/src/components/cookies.tsx";
-import { LinkedList } from "/src/components/LinkedList.tsx";
-// import basicTopicDict from "../podcast/page";
+import * as THREE from 'three';
+import SimplexNoise from 'simplex-noise';
 
 
-// TODO: Fix Next button, if you click it multiple times it will fail.
-
+// Import Plyr CSS in the component or _app.js
+import 'plyr/dist/plyr.css';
 import React, { useEffect, useState, useRef } from "react";
-import { create } from "domain";
-import { parse } from "path";
+import { useRouter } from "next/navigation";
+
 
 // TODO: Complete redesign.(CSS)
 // TODO: Better Audio Bar Design.
@@ -29,7 +26,6 @@ import { parse } from "path";
 
 // 4. When intro is done grab the next segment. ( Develop this a linked list of segments.)
 // 5. When the next segment is done grab the next segment.
-// 6.
 
 
 const reverseKeyValuePairs = (inputDict: { [key: string]: string }): { [key: string]: string } => {
@@ -65,7 +61,6 @@ const basicTopicDict = {
 };
 
 const reversedDict = reverseKeyValuePairs(basicTopicDict);
-console.log("This is the reversedDict", reversedDict);
 
 const reversedMap = new Map<string, string> (Object.entries(reversedDict));
 
@@ -85,12 +80,16 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = () => {
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
   const [podcastIndex, setPodcastIndex] = useState("intro");
-  var [content_preview, setContentPreview] = useState<Record<
-    string,
-    string
-  > | null>(null);
+  var [content_preview, setContentPreview] = useState<Record<string, string> | null>(null);
+  const [error, setError] = useState<string>("");
+  const router = useRouter();
 
-  const audioPlayerRef = useRef<HTMLAudioElement>(null);
+  const audioPlayerRef = useRef(null);
+  function sleep(milliseconds: number) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  }
+
+  // const audioPlayerRef = useRef<HTMLAudioElement>(null);
 
   // Previous Podcast Index
   const previousPodcastIndex = () => {
@@ -168,11 +167,22 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
         body: JSON.stringify(payload),
       });
       console.log(nexSegResponse + "Next Segment Response");
-      return nexSegResponse.status;
+
+      if (nexSegResponse.status <= 299){
+
+        return nexSegResponse.status;
+      }
+
+      else if (nexSegResponse.status == 429){
+        setError("Congrats! You have generated all your podcast segments for the pilot! 🎊🥳💃. You are being redirected to the waitlist at https://tokenizedtoast.com/waitlist in 5 seconds. ")
+        
+          await sleep(5*1000);
+          return 429;
+      }
     } catch {
-      // Rate Limit Error. // TODO: Rate Limit Bug🪲
-      console.error("Error fetching next segment");
-      return 429;
+      // Rate Limit Error
+      setError("We are experiencing issues. Hold tight! ")
+      return 501;
     }
   }
 
@@ -227,7 +237,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
 
   async function streamAudio(podcastIndex: string) {
     const url = `${base}get-segment-stream`;
-    console.log("URL", url);
     const email = getCookie("email");
     const jwt = getCookie("jwt-token");
 
@@ -245,8 +254,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
         },
         body: JSON.stringify(payload),
       });
-
-      console.log(response + "response");
 
       if (response.ok) {
         // Getting Presigned S3 URL
@@ -275,18 +282,58 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
 
   useEffect(() => {
     streamAudio(podcastIndex);
-    const player = audioPlayerRef.current;
-    if (player) {
-      const handleAudioEnd = () => nextPodcastIndex();
-      player.addEventListener("ended", handleAudioEnd);
+    if (typeof window !== 'undefined' && audioPlayerRef.current !== null) {
+      // Dynamically import Plyr here inside useEffect
+      import('plyr').then(Plyr => {
+        if (audioPlayerRef.current === null) {
+          return;
+        }
 
-      // Cleanup function to remove event listener
-      return () => player.removeEventListener("ended", handleAudioEnd);
+        if (audioPlayerRef.current === null) {
+          return;
+        }
+        
+    
+        const player = new Plyr.default(audioPlayerRef.current);
+  
+        // Function to be called when the audio ends
+        const handleAudioEnd = () => {
+          nextPodcastIndex(); // Assuming this function loads and plays the next segment
+        };
+
+  
+        // Add event listener for when the audio ends
+        
+        audioPlayerRef.current.addEventListener('ended', handleAudioEnd);
+        
+  
+        // Cleanup function to destroy Plyr instance and remove event listener when component unmounts
+        return () => {
+          player.destroy();
+          if (audioPlayerRef.current) {
+            audioPlayerRef.current.removeEventListener('ended', handleAudioEnd);
+          }
+        };
+      });
     }
   }, [podcastIndex]);
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen px-4 lg:px-8">
+     
+     {error && (
+        <div
+          style={{
+            backgroundColor: "#8B0000",
+            padding: "10px",
+            marginBottom: "20px",
+            borderRadius: "5px",
+            color: "#fff",
+          }}
+        >
+          {error}
+        </div>
+      )}
       <div className="max-w-4xl w-full">
         <p className="inline-block px-3 py-1 border border-gray-300 text-sm text-gray-700 bg-gray-100 rounded-full mb-4">
           {reversedMap.get(content_preview?.topic || "Advanced Topics")}
@@ -340,14 +387,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
             </svg>
           </button>
         </div>
-        <audio
-          style={{ width: "80%", margin: "auto" }}
-          id="audioPlayer"
-          ref={audioPlayerRef}
-          autoPlay
-          controls
-          src={audioSrc}
-        ></audio>
+          <audio
+            style={{ width: "80%", margin: "auto" }}
+            id="audioPlayer"
+            ref={audioPlayerRef}
+            autoPlay
+            controls
+            src={audioSrc}
+          ></audio>
         <div>
           <button onClick={nextPodcastIndex}>
             <svg

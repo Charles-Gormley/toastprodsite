@@ -10,6 +10,8 @@ const LogIn = () => {
   const { setAuth } = useContext(AuthContext);
   const userRef:any = useRef();
 
+  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
