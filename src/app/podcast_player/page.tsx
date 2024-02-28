@@ -3,8 +3,8 @@
 import MediaButtons from "@/components/MediaButtons";
 import Player from "@madzadev/audio-player";
 import "@madzadev/audio-player/dist/index.css";
-import { getCookie, setCookie } from "/src/components/cookies.tsx";
-import { LinkedList } from "/src/components/LinkedList.tsx";
+import { getCookie, setCookie } from "../../components/cookies";
+// import { LinkedList } from "../../components/LinkedList";
 // import basicTopicDict from "../podcast/page";
 
 // TODO: Fix Next button, if you click it multiple times it will fail.
@@ -363,7 +363,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
           ref={audioPlayerRef}
           autoPlay
           controls
-          src={audioSrc}
+          src={audioSrc || ""}
         ></audio>
         <div>
           <button onClick={nextPodcastIndex}>
