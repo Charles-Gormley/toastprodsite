@@ -23,47 +23,49 @@ const SignUp = () => {
   const [accessCode, setAccessCode] = useState("");
   const [tokenErrorMessage, setTokenErrorMessage] = useState("");
 
-  const fetchData = async () => {
+  const fetchData = async (currentAccessCode: string) => {
     const url =
       "https://k4pb7ngegvtmqlvzfb2rj6zujm0jlbbt.lambda-url.us-east-1.on.aws/";
     const params = new URLSearchParams({
-      accessToken: accessCode,
+      accessToken: currentAccessCode,
       email: "123@test.com",
     });
 
     try {
       const response = await fetch(`${url}?${params.toString()}`);
       if (response.ok) {
-        console.log(`Access Code ${accessCode} is valid!`);
+        console.log(`Access Code ${currentAccessCode} is valid!`);
         const data = await response.text();
         console.log(data);
-        setTokenErrorMessage("");
-
         return true;
       } else {
         console.log("Response not successful:", response.statusText);
-        setTokenErrorMessage("Invalid access code.");
-
         return false;
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      setTokenErrorMessage("Network or server error.");
-
       return false;
     }
   };
 
   async function handleTokenChange(e: any) {
-    setAccessCode(e.target.value);
-    return true;
-    
-    //if ((await fetchData()) === false) {
-    //  setTokenErrorMessage("Invalid access code.");
-    //  return;
-    //}
-    //return setTokenErrorMessage("");
+    const newAccessCode = e.target.value;
+    setAccessCode(newAccessCode);
+
+    fetchData(newAccessCode).then((isValid) => {
+      if (isValid) {
+        setTokenErrorMessage("");
+      } else {
+        setTokenErrorMessage("Invalid access code.");
+      }
+    });
   }
+
+  //if ((await fetchData()) === false) {
+  //  setTokenErrorMessage("Invalid access code.");
+  //  return;
+  //}
+  //return setTokenErrorMessage("");
 
   useEffect(() => {
     if (
@@ -132,40 +134,39 @@ const SignUp = () => {
       setMatchPasswordErrMessage("Passwords Do Not Match");
     }
   }
-
+  // if button enabled with JS hack
+  // if (tokenErrorMessage) {
+  //  console.error("Invalid access token. Please check and try again.");
+  //  return; // Exit the function if there's a token error
+  //}
   const router = useRouter();
   async function handleSubmit(e: any) {
     e.preventDefault();
+    const isTokenValid = await fetchData(accessCode);
     // if button enabled with JS hack
-    await fetchData(); // Make sure to wait for fetchData to complete
-    // if (tokenErrorMessage) {
-    //  console.error("Invalid access token. Please check and try again.");
-    //  return; // Exit the function if there's a token error
-    //}
-
-    if (await fetchData() === false) {
+    if (!isTokenValid) {
       console.error("Invalid access token. Please check and try again.");
-      return;
+      return; // Exit the function if there's a token error
     }
-    const v1 = EMAIL_REGEX.test(email);
-    const v2 = PWD_REGEX.test(password);
-    const v3 = await fetchData() === false;
-    if (!v1 || !v2) {
+
+    const isEmailValid = EMAIL_REGEX.test(email);
+    const isPasswordValid = PWD_REGEX.test(password);
+
+    if (!isEmailValid || !isPasswordValid) {
       setErrMsg("Invalid Entry");
       return;
     }
 
-    if (!v1) {
+    if (!isEmailValid) {
       setErrMsg("Invalid email address");
+      return; // Exit function to prevent further execution
     }
 
-    if (!v2) {
+    if (!isPasswordValid) {
       setErrMsg("Invalid password");
+      return; // Exit function to prevent further execution
     }
 
-    if (v3) {
-      setErrMsg("Invalid access token. Please check and try again.");
-    }
     try {
       const response = await fetch(
         "https://api.tokenizedtoast.com/user-signup",
@@ -181,10 +182,7 @@ const SignUp = () => {
         throw new Error(errorMessage || "Failed to sign up user");
       }
 
-      //const data = await response.json();
-      console.log(response);
-      // *****Handle response data here*****
-
+      console.log("User signed up successfully");
       router.push(`/verification/${email}`);
     } catch (error: any) {
       console.error("Error signing up user:", error.message);
