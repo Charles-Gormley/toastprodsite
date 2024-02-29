@@ -21,6 +21,10 @@ const NavBar: React.FC = () => {
     ["/contact", "Contact Us"],
   ];
 
+  const handleMenuClick = () => {
+    setIsMenuOpen(false);
+  };
+
   let classNameVar = `${covered_by_your_grace.className} text-5xl ml-4`
   
   // TODO: Make the subscript actually a subscript 
@@ -76,7 +80,7 @@ const NavBar: React.FC = () => {
               key={index}
               className="text-gray-900 dark:text-white hover:font-bold w-full"
             >
-              <Link className="block text-center py-2" href={href}>
+              <Link className="block text-center py-2" onClick={handleMenuClick} href={href}>
                 {label}
               </Link>
             </li>
@@ -85,6 +89,7 @@ const NavBar: React.FC = () => {
             <Link
               className="block text-center py-2 bg-black text-white font-bold rounded hover:bg-gray-800 transition duration-300 w-full"
               href="/login"
+              onClick={handleMenuClick}
             >
               Create Your Podcast
             </Link>
@@ -99,14 +104,14 @@ const NavBar: React.FC = () => {
               key={index}
               className="text-gray-900 dark:text-white hover:font-bold"
             >
-              <Link href={href}>{label}</Link>
+              <Link href={href} onClick={handleMenuClick}>{label}</Link>
             </li>
           ))}
         </ul>
       </div>
 
       <div className="hidden md:block">
-        <Link href="/login">
+        <Link href="/login" onClick={handleMenuClick}>
           <button className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent dark:border-white dark:bg-white dark:text-black dark:hover:bg-gray-900 dark:hover:text-white transition duration-300">
             Create Your Podcast
           </button>
