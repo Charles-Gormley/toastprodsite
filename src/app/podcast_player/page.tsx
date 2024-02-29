@@ -77,7 +77,7 @@ const AudioPlayer: React.FC = () => {
   var [content_preview, setContentPreview] = useState<Record<string, string> | null>(null);
   const [error, setError] = useState<string>("");
 
-  const audioPlayerRef = useRef(null);
+  const audioPlayerRef = useRef<HTMLAudioElement | null>(null);
   function sleep(milliseconds: number) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   }
