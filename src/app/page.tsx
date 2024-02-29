@@ -10,6 +10,15 @@ export default function Home() {
         subtitle="Experience AI Curated Podcasts at your fingertips. Hear only the stories YOU want to hear, without the bias. With sources from thousands of articles, you can learn more in just one click."
       />
 
+      <button>
+        <a
+          href="/login"
+          className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent dark:border-white dark:bg-white dark:text-black dark:hover:bg-gray-900 dark:hover:text-white transition duration-300"
+        >
+          Create Your Podcast
+        </a>
+      </button>
+
       <Infograph
         heading="A New way to stay in the know."
         subHeading="Building on modern foundations"
