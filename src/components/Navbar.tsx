@@ -7,7 +7,6 @@ import logo from "../assets/logo.svg";
 import { Covered_By_Your_Grace } from "next/font/google";
 
 const covered_by_your_grace = Covered_By_Your_Grace({
-  family: 'Helvetica Neue',
   weight: ['400'],
   subsets: ['latin']
 })

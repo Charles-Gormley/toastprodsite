@@ -2,9 +2,10 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 import Link from "next/link";
-import { getCookie, setCookie } from "/src/components/cookies.tsx";
+import { getCookie, setCookie } from "../../components/cookies";
 import HeroImg from "../../assets/placeholder_login.png";
 import { useRouter } from "next/navigation";
+
 
 const LogIn = () => {
   const { setAuth } = useContext(AuthContext);

@@ -9,6 +9,7 @@ import SimplexNoise from 'simplex-noise';
 import 'plyr/dist/plyr.css';
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { Noto_Sans_Tamil_Supplement } from "next/font/google";
 
 
 // TODO: Complete redesign.(CSS)
@@ -72,17 +73,11 @@ let lastSegmentIndex = -1; // last segment index that was played.
 
 // TODO: We need Automatic Next Button
 
-// Audio Player
-interface AudioPlayerProps {
-  podcastIndex: string;
-}
-
-const AudioPlayer: React.FC<AudioPlayerProps> = () => {
+const AudioPlayer: React.FC = () => {
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
   const [podcastIndex, setPodcastIndex] = useState("intro");
   var [content_preview, setContentPreview] = useState<Record<string, string> | null>(null);
   const [error, setError] = useState<string>("");
-  const router = useRouter();
 
   const audioPlayerRef = useRef(null);
   function sleep(milliseconds: number) {
@@ -184,6 +179,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
       setError("We are experiencing issues. Hold tight! ")
       return 501;
     }
+    return 400;
   }
 
   // Next Podcast Index
@@ -304,14 +300,20 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
   
         // Add event listener for when the audio ends
         
-        audioPlayerRef.current.addEventListener('ended', handleAudioEnd);
+        if (audioPlayerRef.current !== null) {
+            if (audioPlayerRef.current) {
+              audioPlayerRef.current.addEventListener('ended', handleAudioEnd);
+            }
+          }
         
   
         // Cleanup function to destroy Plyr instance and remove event listener when component unmounts
         return () => {
           player.destroy();
-          if (audioPlayerRef.current) {
-            audioPlayerRef.current.removeEventListener('ended', handleAudioEnd);
+          if (audioPlayerRef.current !== null) {
+            if (audioPlayerRef.current) {
+              audioPlayerRef.current.removeEventListener('ended', handleAudioEnd);
+            }
           }
         };
       });
@@ -410,7 +412,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = () => {
             ref={audioPlayerRef}
             autoPlay
             controls
-            src={audioSrc}
+            src={audioSrc ?? ''}
           ></audio>
         <div>
           <button onClick={nextPodcastIndex}>
