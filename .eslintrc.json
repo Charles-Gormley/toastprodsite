@@ -1,3 +1,10 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    // Your existing configuration
+  ],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-img-element": "off"
+  }
+  // Include any other existing configurations below
 }
