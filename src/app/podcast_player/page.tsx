@@ -1,8 +1,6 @@
 "use client";
 import "@madzadev/audio-player/dist/index.css";
-import { getCookie, setCookie } from "/src/components/cookies.tsx";
-import * as THREE from 'three';
-import SimplexNoise from 'simplex-noise';
+import { getCookie, setCookie } from "../../components/cookies";
 
 
 // Import Plyr CSS in the component or _app.js
