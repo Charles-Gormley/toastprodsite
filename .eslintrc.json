@@ -1,10 +1,6 @@
 {
-  "extends": [
-    // Your existing configuration
-  ],
   "rules": {
-    "react/no-unescaped-entities": "off",
-    "@next/next/no-img-element": "off"
+    "*": "off"
+    // add other rules you want to turn off
   }
-  // Include any other existing configurations below
 }
