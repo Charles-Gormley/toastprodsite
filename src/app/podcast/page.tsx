@@ -56,7 +56,7 @@ function sleep(milliseconds: number) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-const hosts = ["Carl", "Luna"];
+const hosts = ["Carl", "Laurel", "Luna" ];
 
 interface TopicButtonProps {
   label: string;
@@ -383,6 +383,7 @@ const NewsInterests: React.FC<{}> = () => {
             />
           ))}
         </div>
+        <p>Luna is a lower quality voice for development purposes.</p>
       </section>
 
       <div className="flex justify-center mt-6">
