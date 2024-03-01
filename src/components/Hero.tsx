@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import heroImage from "../assets/placeholder_login.png";
 import Container from "./Container";
+import Link from "next/link";
 
 interface HeroSectionProps {
   title?: string;
@@ -22,6 +23,10 @@ const HeroSection = ({ title, subtitle }: HeroSectionProps) => {
           <p className="text-lg mt-4 text-slate-600">
             {subtitle}
           </p>
+          <div className="mt-6">
+            <Link href="/signup"><button className="btn btn-outline btn-lg mr-4 mb-4 text-black">Get Started</button></Link>
+            <Link href="/pricing"><button className="btn btn-outline btn-lg mb-4 text-black">Learn More</button></Link>
+          </div>
         </div>
         <div className="lg:w-1/2 flex justify-center lg:justify-end px-4 py-6">
           <Image
