@@ -56,7 +56,7 @@ function sleep(milliseconds: number) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-const hosts = ["Carl", "Luna"];
+const hosts = ["Carl", "Laurel"];
 
 interface TopicButtonProps {
   label: string;
