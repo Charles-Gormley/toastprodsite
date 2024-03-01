@@ -17,7 +17,6 @@ const LoadingOverlay = () => (
       }}
     >
       <Image src={eggLoading} alt="Loading..." />
-      <div>Loading...</div>
 
     </div>
   );
