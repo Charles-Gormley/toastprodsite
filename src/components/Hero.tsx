@@ -24,7 +24,7 @@ const HeroSection = ({ title, subtitle }: HeroSectionProps) => {
             {subtitle}
           </p>
           <div className="mt-6">
-            <Link href="/signup"><button className="btn btn-outline btn-lg mr-4 mb-4 text-black">Get Started</button></Link>
+            <Link href="/signup"><button className="btn btn-outline btn-lg mr-4 mb-4 text-black">Sign Up</button></Link>
           </div>
         </div>
         <div className="lg:w-1/2 flex justify-center lg:justify-end px-4 py-6">
