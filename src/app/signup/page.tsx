@@ -253,7 +253,7 @@ const SignUp = () => {
               <p className="text-red-500 text-sm">{tokenErrorMessage}</p>
             )}
             <button
-              className={`w-full mt-6 px-4 py-3 bg-black text-white font-bold rounded hover:bg-gray-700 ${
+              className={`w-full mt-6 px-4 py-3 bg-black text-black font-bold rounded hover:bg-gray-700 ${
                 errorsPresent && "cursor-not-allowed"
               }`}
               disabled={errorsPresent}
