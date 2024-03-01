@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
 
   
   return (
-    <nav className="flex items-center justify-between py-4 px-6 bg-white">
+    <nav className="flex items-center justify-between py-4 px-6 bg-white text-black">
       <Image
         src={logo}
         alt="Logo"
