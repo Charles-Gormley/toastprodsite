@@ -95,7 +95,7 @@ const LogIn = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button className="w-full mt-6 px-4 py-3 bg-black text-white font-bold rounded hover:bg-gray-700">
+            <button className="w-full mt-6 px-4 py-3 bg-black text-black font-bold rounded hover:bg-gray-700">
             Log In
             </button>
           </form>
