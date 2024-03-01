@@ -13,8 +13,3 @@ body {
   background-color: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1A202C;
-  }
-}

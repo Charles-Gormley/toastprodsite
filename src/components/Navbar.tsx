@@ -31,19 +31,18 @@ const NavBar: React.FC = () => {
 
   
   return (
-    <nav className="flex items-center justify-between py-4 px-6 bg-white dark:bg-gray-900 relative">
+    <nav className="flex items-center justify-between py-4 px-6 bg-white">
       <Image
         src={logo}
         alt="Logo"
         width={40}
         height={40}
-        className="dark:filter dark:invert"
       />
 
       <h1>Tokenized Toast <sub className={classNameVar}>Pilot</sub></h1>
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="md:hidden px-2 py-1 border rounded text-gray-900 dark:text-white"
+        className="md:hidden px-2 py-1 border rounded text-gray-900"
       >
         <svg
           className="h-6 w-6"
@@ -72,13 +71,13 @@ const NavBar: React.FC = () => {
       <div
         className={`${
           isMenuOpen ? "flex" : "hidden"
-        } md:hidden flex-col items-center fixed inset-0 top-14 mt-2 bg-white dark:bg-gray-900 shadow-md z-20`}
+        } md:hidden flex-col items-center fixed inset-0 top-14 mt-2 bg-white`}
       >
         <ul className="w-full space-y-1">
           {tabs.map(([href, label], index) => (
             <li
               key={index}
-              className="text-gray-900 dark:text-white hover:font-bold w-full"
+              className="text-gray-900"
             >
               <Link className="block text-center py-2" onClick={handleMenuClick} href={href}>
                 {label}
@@ -102,7 +101,7 @@ const NavBar: React.FC = () => {
           {tabs.map(([href, label], index) => (
             <li
               key={index}
-              className="text-gray-900 dark:text-white hover:font-bold"
+              className="text-gray-900 hover:font-bold"
             >
               <Link href={href} onClick={handleMenuClick}>{label}</Link>
             </li>
@@ -112,7 +111,7 @@ const NavBar: React.FC = () => {
 
       <div className="hidden md:block">
         <Link href="/login" onClick={handleMenuClick}>
-          <button className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent dark:border-white dark:bg-white dark:text-black dark:hover:bg-gray-900 dark:hover:text-white transition duration-300">
+          <button className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent transition duration-300">
             Create Your Podcast
           </button>
         </Link>

@@ -13,11 +13,7 @@ body {
   background-color: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1A202C;
-  }
-}
+
 /* Plyr Audio Player Customizations */
 
 /* Customizing the volume slider */

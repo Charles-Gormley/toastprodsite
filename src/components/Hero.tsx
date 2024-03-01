@@ -14,12 +14,12 @@ interface HeroSectionProps {
 const HeroSection = ({ title, subtitle }: HeroSectionProps) => {
   return (
     <Container>
-      <div className="flex flex-col-reverse lg:flex-row justify-between items-center pt-16 pb-8 md:pt-12 md:pb-24">
+      <div className="flex flex-col-reverse lg:flex-row justify-between items-center pt-16 pb-8 md:pt-12 md:pb-24 text-black">
         <div className="lg:w-1/2 px-4 py-6 text-center lg:text-left">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold">
             {title}
           </h1>
-          <p className="text-lg mt-4 text-slate-600 dark:text-white">
+          <p className="text-lg mt-4 text-slate-600">
             {subtitle}
           </p>
         </div>

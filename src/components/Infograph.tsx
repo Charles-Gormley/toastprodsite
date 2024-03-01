@@ -20,7 +20,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   return (
     <Container>
-      <main className="flex flex-col lg:flex-row dark:text-white">
+      <main className="flex flex-col lg:flex-row text-black">
         <div className="flex-1">
           <a>PlaceHolder</a>
         </div>

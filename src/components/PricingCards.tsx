@@ -61,7 +61,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan }) => {
           href={plan.button.link || "#"}
           className={`inline-block w-full text-center py-2 px-4 rounded-md ${
             plan.popular
-              ? "bg-blue-500 text-white"
+              ? "bg-blue-500 text-black"
               : "border border-blue-500 text-blue-500"
           }`}
         >
