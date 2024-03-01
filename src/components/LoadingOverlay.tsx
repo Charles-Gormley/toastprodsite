@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import eggLoading from '../../public/loading_egg.gif'
+import eggLoading from '../../public/loadingToaster.gif'
 
 const LoadingOverlay = () => (
     <div
