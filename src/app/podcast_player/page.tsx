@@ -278,17 +278,10 @@ const AudioPlayer: React.FC = () => {
     streamAudio(podcastIndex);
     if (typeof window !== 'undefined' && audioPlayerRef.current !== null) {
       // Dynamically import Plyr here inside useEffect
-      import('plyr').then(Plyr => {
+      
         if (audioPlayerRef.current === null) {
           return;
         }
-
-        if (audioPlayerRef.current === null) {
-          return;
-        }
-        
-    
-        const player = new Plyr.default(audioPlayerRef.current);
   
         // Function to be called when the audio ends
         const handleAudioEnd = () => {
@@ -299,22 +292,16 @@ const AudioPlayer: React.FC = () => {
         // Add event listener for when the audio ends
         
         if (audioPlayerRef.current !== null) {
-            if (audioPlayerRef.current) {
               audioPlayerRef.current.addEventListener('ended', handleAudioEnd);
-            }
           }
         
   
         // Cleanup function to destroy Plyr instance and remove event listener when component unmounts
         return () => {
-          player.destroy();
           if (audioPlayerRef.current !== null) {
-            if (audioPlayerRef.current) {
               audioPlayerRef.current.removeEventListener('ended', handleAudioEnd);
-            }
           }
         };
-      });
     }
   }, [podcastIndex]);
 
