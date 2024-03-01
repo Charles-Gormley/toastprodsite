@@ -26,6 +26,7 @@ export default function Home() {
             </a>
           </button>
         )}
+        
 
         <Infograph
           heading="A New way to stay in the know."
