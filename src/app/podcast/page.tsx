@@ -289,7 +289,7 @@ const NewsInterests: React.FC<{}> = () => {
       </h1>
 
       <section className="mb-6">
-        <h2 className="text-xl font-bold mb-4">Basic Topics</h2>
+        <h2 className="text-xl font-bold mb-4">Select topic(s) you would like to listen to. </h2>
         <div className="flex flex-wrap justify-center">
           {basicTopics.map((topic: string) => (
             <TopicButton
@@ -305,7 +305,7 @@ const NewsInterests: React.FC<{}> = () => {
       </section>
 
       <section className="mb-6 w-full md:w-3/4 xl:w-1/2 mx-auto">
-        <h3 className="text-md font-semibold mb-2">Advanced Topics</h3>
+        <h3 className="text-md font-semibold mb-2">Other Topics you would like to listen to? Enter them below!</h3>
         {/* Wrap the input in a div for centering */}
         <div className="flex justify-center items-center w-full">
           <input
