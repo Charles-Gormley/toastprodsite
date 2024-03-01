@@ -5,7 +5,7 @@ import placeholder3 from "../../assets/placeholder_about3.png";
 
 export default function AboutPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 dark:text-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <section className="text-center">
         <h1 className="text-4xl font-bold mb-3">Our Story</h1>
         <p className="mb-6">
