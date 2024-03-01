@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useState } from "react"
+import React from "react";
 
 interface AuthContextType {
     auth?: { email: string; jwtToken: string }; // Adjust based on what your auth state shape is
@@ -13,7 +14,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [auth, setAuth] = useState({} as AuthContextType["auth"]);
 
     return (
-        <AuthContext.Provider value={{auth, setAuth}}>
+            <AuthContext.Provider value={{auth, setAuth}}>
             {children}
         </AuthContext.Provider>
     )
