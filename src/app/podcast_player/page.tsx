@@ -6,6 +6,7 @@ import { getCookie, setCookie } from "../../components/cookies";
 // Import Plyr CSS in the component or _app.js
 import 'plyr/dist/plyr.css';
 import React, { useEffect, useState, useRef } from "react";
+import nlp from 'compromise';
 import { useRouter } from "next/navigation";
 import { Noto_Sans_Tamil_Supplement } from "next/font/google";
 
@@ -279,9 +280,6 @@ const AudioPlayer: React.FC = () => {
     if (typeof window !== 'undefined' && audioPlayerRef.current !== null) {
       // Dynamically import Plyr here inside useEffect
       import('plyr').then(Plyr => {
-        if (audioPlayerRef.current === null) {
-          return;
-        }
 
         if (audioPlayerRef.current === null) {
           return;
@@ -299,9 +297,7 @@ const AudioPlayer: React.FC = () => {
         // Add event listener for when the audio ends
         
         if (audioPlayerRef.current !== null) {
-            if (audioPlayerRef.current) {
-              audioPlayerRef.current.addEventListener('ended', handleAudioEnd);
-            }
+            audioPlayerRef.current.addEventListener('ended', handleAudioEnd);
           }
         
   
@@ -309,27 +305,37 @@ const AudioPlayer: React.FC = () => {
         return () => {
           player.destroy();
           if (audioPlayerRef.current !== null) {
-            if (audioPlayerRef.current) {
-              audioPlayerRef.current.removeEventListener('ended', handleAudioEnd);
-            }
+            audioPlayerRef.current.removeEventListener('ended', handleAudioEnd);
           }
         };
       });
     }
   }, [podcastIndex]);
 
+  
+
   function splitTextIntoParagraphs(text: string): string[] {
-    const regexPattern = /(?<!\b(?:[A-Z]\.){1,}[A-Z]?)\.\s+(?=[A-Z])|\.(?=$)/g;
-    const sentences = text.split(regexPattern);
-
-    const paragraphs: string[] = [];
-    for (let i = 0; i < sentences.length; i += 4) {
-      const paragraphSentences = sentences.slice(i, i + 4);
-
-      paragraphs.push(paragraphSentences.join(" "));
-    }
-
-    return paragraphs;
+      const doc = nlp(text);
+      const sentences: string[] = doc.sentences().out('array');
+      
+      let paragraphs: string[] = [];
+      let currentParagraph: string[] = [];
+      
+      sentences.forEach(sentence => {
+          currentParagraph.push(sentence);
+          // Randomly decide to end the current paragraph
+          if (currentParagraph.length >= 3 && Math.random() > 0.5) {
+              paragraphs.push(currentParagraph.join(' '));
+              currentParagraph = []; // Start a new paragraph
+          }
+      });
+      
+      // Add the last paragraph if not empty
+      if (currentParagraph.length > 0) {
+          paragraphs.push(currentParagraph.join(' '));
+      }
+      
+      return paragraphs;
   }
 
 

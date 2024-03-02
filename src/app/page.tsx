@@ -1,5 +1,4 @@
 'use client'
-
 import Hero from "../components/Hero";
 import Infograph from "../components/Infograph";
 import HeroImg from "../assets/heroImg.png";
