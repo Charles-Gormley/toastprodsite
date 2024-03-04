@@ -363,7 +363,7 @@ const AudioPlayer: React.FC = () => {
         onClick={goToGoogleForm}
         className="px-4 py-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
       >
-        Fill out Our Early Access Survey!🙌
+        Click Here to Fill out Our Early Access Survey!🙌
       </button>
 
       <div className="max-w-4xl w-full">

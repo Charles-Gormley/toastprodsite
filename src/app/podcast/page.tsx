@@ -2,6 +2,7 @@
 import { on } from "events";
 import React, { useState, KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
+const controller = new AbortController();
 
 // Import cookie
 import { getCookie, setCookie } from "../../components/cookies";
@@ -177,51 +178,65 @@ const NewsInterests: React.FC<{}> = () => {
     setCookie("character", selectedHost);
     setCookie("tone", selectedTone);
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(payload),
-      });
 
-      const jsonResponse = await response.json();
-      console.log("Podcast Creation Response", response);
-      console.log("Podcast Creation JSON Response", jsonResponse);
+    
+    for (let i = 0; i < selectedBasicTopics.length; i) {
+      const timeout = setTimeout(() => controller.abort(), 1000*15); 
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(payload),
+        });
 
-      if (!response.ok) {
-        if (response.status === 401) {
-          setError(
-            "You are an unathorized user. Please login or create an account :)"
-          );
-        } 
-        else if (response.status === 403 || response.status === 404) {
-          setError(
-            "Hmmm. seems like you haven'nt logged in for awhile or your session has expired. Please login again to enjoy the best podcasts on earth."
-          );  
-        } 
-        else if (response.status === 429){
-          setError("Congrats! You have generated all your podcast segments for the pilot! 🎊🥳💃. You are being redirected to the waitlist at https://tokenizedtoast.com/waitlist in 5 seconds. ")
-        
-          await sleep(5*1000);
+        clearTimeout(timeout);
 
-          router.push("/waitlist")
+        const jsonResponse = await response.json();
+        console.log("Podcast Creation Response", response);
+        console.log("Podcast Creation JSON Response", jsonResponse);
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            setError(
+              "You are an unathorized user. Please login or create an account :)"
+            );
+          } 
+          else if (response.status === 403 || response.status === 404) {
+            setError(
+              "Hmmm. seems like you haven'nt logged in for awhile or your session has expired. Please login again to enjoy the best podcasts on earth."
+            );  
+          } 
+          else if (response.status === 429){
+            setError("Congrats! You have generated all your podcast segments for the pilot! 🎊🥳💃. You are being redirected to the waitlist at https://tokenizedtoast.com/waitlist in 5 seconds. ")
+          
+            await sleep(5*1000);
+
+            router.push("/waitlist")
+          }
+          else if (response.status >= 500) {
+            setError(
+              "We are having some issues right now :( Please try again later. We'll email you when we're back up and running."
+            );
+          } 
+          else {
+            setError("An error occurred. Please try again later.");
+          }
         }
-        else if (response.status >= 500) {
-          setError(
-            "We are having some issues right now :( Please try again later. We'll email you when we're back up and running."
-          );
-        } 
-        else {
-          setError("An error occurred. Please try again later.");
+
+        if (response.ok) {
+          console.log("Podcast creation successful.")
+          router.push("/podcast_player");
+        }
+      } 
+      catch (error: any) {
+        if (error.name === 'AbortError') {
+          console.log('Request timed out');
+          i++;
+        }
+        else{
+          console.log("Error:", error);
         }
       }
-
-      if (response.ok) {
-        console.log("Podcast creation successful.")
-        router.push("/podcast_player");
-      }
-    } catch (error) {
-      console.error("Error:", error);
     }
   };
 
