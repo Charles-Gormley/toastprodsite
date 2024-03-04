@@ -200,7 +200,7 @@ const SignUp = () => {
           </h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+                className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
                 emailErr && "border-red-500"
               }`}
               type="email"
@@ -213,7 +213,7 @@ const SignUp = () => {
 
             <div className="relative">
               <input
-                className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+                className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
                   passwordErrMessage && "border-red-500"
                 }`}
                 type={showPassword ? "text" : "password"}
@@ -233,7 +233,7 @@ const SignUp = () => {
 
             <div className="relative">
               <input
-                className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+                className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
                   matchPasswordErrMessage && "border-red-500"
                 }`}
                 type={showConfirmPassword ? "text" : "password"}
@@ -252,7 +252,7 @@ const SignUp = () => {
             </div>
 
             <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+              className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
                 tokenErrorMessage && "border-red-500"
               }`}
               type="text"
