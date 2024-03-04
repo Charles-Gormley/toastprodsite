@@ -16,6 +16,9 @@ const SignUp = () => {
   const [matchPassword, setMatchPassword] = useState("");
   const [matchPasswordErrMessage, setMatchPasswordErrMessage] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false); // For the password field
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [errMsg, setErrMsg] = useState("");
 
   const [errorsPresent, setErrorsPresent] = useState(false);
@@ -23,12 +26,20 @@ const SignUp = () => {
   const [accessCode, setAccessCode] = useState("");
   const [tokenErrorMessage, setTokenErrorMessage] = useState("");
 
-  const fetchData = async (currentAccessCode: string) => {
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const checkAccessCode = async (currentAccessCode: string, email: string) => {
     const url =
       "https://k4pb7ngegvtmqlvzfb2rj6zujm0jlbbt.lambda-url.us-east-1.on.aws/";
     const params = new URLSearchParams({
       accessToken: currentAccessCode,
-      email: "123@test.com",
+      email: email,
     });
 
     try {
@@ -48,18 +59,18 @@ const SignUp = () => {
     }
   };
 
-  async function handleTokenChange(e: any) {
-    const newAccessCode = e.target.value;
-    setAccessCode(newAccessCode);
+  // async function handleTokenChange(e: any) {
+  //   const newAccessCode = e.target.value;
+  //   setAccessCode(newAccessCode);
 
-    fetchData(newAccessCode).then((isValid) => {
-      if (isValid) {
-        setTokenErrorMessage("");
-      } else {
-        setTokenErrorMessage("Invalid access code.");
-      }
-    });
-  }
+  //   fetchData(newAccessCode, email).then((isValid) => {
+  //     if (isValid) {
+  //       setTokenErrorMessage("");
+  //     } else {
+  //       setTokenErrorMessage("Invalid access code.");
+  //     }
+  //   });
+  // }
 
   //if ((await fetchData()) === false) {
   //  setTokenErrorMessage("Invalid access code.");
@@ -96,76 +107,56 @@ const SignUp = () => {
     return EMAIL_REGEX.test(email);
   }
 
-  function handleEmailChange(e: any) {
-    setEmail(e.target.value);
-    if (validateEmail()) {
-      setEmailErr(false);
-    } else {
-      setEmailErr(true);
-    }
-  }
-
-  function handlePasswordChange(e: any) {
-    const pwd = e.target.value;
-    setPassword(e.target.value);
+  function checkPasswordValidity(pwd: string) {
     if (pwd.length < 8) {
-      setPasswordErrMessage("Password must be 8 at least characters");
-      return;
+      setErrMsg("Password must be 8 at least characters");
+      return false;
     }
     if (pwd.length > 24) {
-      setPasswordErrMessage("Password must be less than 24 characters");
-      return;
-    }
-    if (!PWD_REGEX.test(pwd)) {
-      setPasswordErrMessage(
-        "Invalid Password: You must include uppercase and lowercase letters, a number and a special character. Allowed special characters: ! @ # $ %"
-      );
-      return;
+      setErrMsg("Password must be less than 24 characters");
+      return false;
     }
     setPasswordErrMessage("");
+    return true;
   }
 
-  function handleMatchPasswordChange(e: any) {
-    const newPassword = e.target.value;
-    setMatchPassword(newPassword);
-    if (password === newPassword) {
+  function checkMatchPassword(password: string, matchPassword: string) {
+    if (password === matchPassword) {
       setMatchPasswordErrMessage("");
+      return true;
     } else {
       setMatchPasswordErrMessage("Passwords Do Not Match");
+      return false;
     }
   }
-  // if button enabled with JS hack
-  // if (tokenErrorMessage) {
-  //  console.error("Invalid access token. Please check and try again.");
-  //  return; // Exit the function if there's a token error
-  //}
   const router = useRouter();
   async function handleSubmit(e: any) {
     e.preventDefault();
-    const isTokenValid = await fetchData(accessCode);
+    const isTokenValid = await checkAccessCode(accessCode, email);
     // if button enabled with JS hack
     if (!isTokenValid) {
       console.error("Invalid access token. Please check and try again.");
+      setErrMsg("Invalid access token. Please check and try again.");
       return; // Exit the function if there's a token error
     }
 
     const isEmailValid = EMAIL_REGEX.test(email);
-    const isPasswordValid = PWD_REGEX.test(password);
-
-    if (!isEmailValid || !isPasswordValid) {
-      setErrMsg("Invalid Entry");
-      return;
-    }
 
     if (!isEmailValid) {
       setErrMsg("Invalid email address");
       return; // Exit function to prevent further execution
     }
-
-    if (!isPasswordValid) {
-      setErrMsg("Invalid password");
+    
+    if (!checkPasswordValidity(password)) {
       return; // Exit function to prevent further execution
     }
+
+    if (!checkMatchPassword(password, matchPassword)) {
+      setErrMsg("Passwords do not match");
+      return; // Exit function to prevent further execution
+    }
+
+    
 
     try {
       const response = await fetch(
@@ -179,7 +170,9 @@ const SignUp = () => {
 
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(errorMessage || "Failed to sign up user");
+        setErrMsg(errorMessage || "Failed to sign up user.");
+        throw new Error(errorMessage || "Failed to sign up user.");
+        
       }
 
       console.log("User signed up successfully");
@@ -206,61 +199,82 @@ const SignUp = () => {
           </h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+                className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
                 emailErr && "border-red-500"
               }`}
               type="email"
               placeholder="Email Address"
               value={email}
-              onChange={handleEmailChange}
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
               required
             />
             {emailErr && <p className="text-red-500 text-sm">Invalid Email</p>}
+
+            <div className="relative">
+              <input
+                className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
+                  passwordErrMessage && "border-red-500"
+                }`}
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+               <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+
+            <div className="relative">
+              <input
+                className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
+                  matchPasswordErrMessage && "border-red-500"
+                }`}
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={matchPassword}
+                onChange={(e) => setMatchPassword(e.target.value)}
+                required
+              />
+              <button
+                  type="button"
+                  onClick={toggleConfirmPasswordVisibility}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                >
+                  {showConfirmPassword ? "Hide" : "Show"}
+                </button>
+            </div>
+
             <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
-                passwordErrMessage && "border-red-500"
-              }`}
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-            {passwordErrMessage && password && (
-              <p className="text-red-500 text-sm">{passwordErrMessage}</p>
-            )}
-            <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
-                matchPasswordErrMessage && "border-red-500"
-              }`}
-              type="password"
-              placeholder="Confirm Password"
-              value={matchPassword}
-              onChange={handleMatchPasswordChange}
-              required
-            />
-            <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+              className={`w-full px-4 py-3 border rounded-lg text-black focus:outline-none focus:border-blue-500 ${
                 tokenErrorMessage && "border-red-500"
               }`}
               type="text"
               placeholder="Enter Access Token"
               value={accessCode}
-              onChange={handleTokenChange}
+              onChange={(e) => setAccessCode(e.target.value)}
               required
             />
             {tokenErrorMessage && (
               <p className="text-red-500 text-sm">{tokenErrorMessage}</p>
             )}
+
             <button
-              className={`w-full mt-6 px-4 py-3 bg-black text-black font-bold rounded hover:bg-gray-700 ${
+              className={`w-full mt-6 px-4 py-3 bg-black text-white font-bold rounded hover:bg-gray-700 ${
                 errorsPresent && "cursor-not-allowed"
               }`}
               disabled={errorsPresent}
             >
               Create Account
             </button>
-            {errMsg && <p className="text-red-500">Invalid Entry</p>}
+
+          {errMsg && <p className="text-red-500">{errMsg} - Invalid Entry</p>}
+
           </form>
           <div className="text-center mt-4">
             <Link href="/login">Already have an Account ? Sign In</Link>

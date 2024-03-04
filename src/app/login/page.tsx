@@ -16,6 +16,7 @@ const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [showPassword, setShowPassword] = useState(false); 
 
   useEffect(() => {
     userRef.current.focus();
@@ -61,6 +62,10 @@ const LogIn = () => {
     }
   }
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="flex flex-wrap min-h-screen bg-white">
       <div className="flex justify-center items-center w-full lg:w-1/2 bg-cover p-10">
@@ -83,13 +88,13 @@ const LogIn = () => {
               type="email"
               placeholder="Email Address"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
               ref={userRef}
               required
             />
             <input
               className="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -97,6 +102,13 @@ const LogIn = () => {
             />
             <button className="w-full mt-6 px-4 py-3 bg-black text-white font-bold rounded hover:bg-gray-700">
             Log In
+            </button>
+            <button
+              type="button" // Ensure this doesn't submit the form
+              className="text-blue-600 hover:text-blue-800 focus:outline-none focus:underline"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? "Hide" : "Show"} Password
             </button>
           </form>
           
