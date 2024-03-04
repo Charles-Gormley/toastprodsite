@@ -210,29 +210,47 @@ const SignUp = () => {
               required
             />
             {emailErr && <p className="text-red-500 text-sm">Invalid Email</p>}
-            <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
-                passwordErrMessage && "border-red-500"
-              }`}
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            {passwordErrMessage && password && (
-              <p className="text-red-500 text-sm">{passwordErrMessage}</p>
-            )}
-            <input
-              className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
-                matchPasswordErrMessage && "border-red-500"
-              }`}
-              type="password"
-              placeholder="Confirm Password"
-              value={matchPassword}
-              onChange={(e) => setMatchPassword(e.target.value)}
-              required
-            />
+
+            <div className="relative">
+              <input
+                className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+                  passwordErrMessage && "border-red-500"
+                }`}
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+               <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+
+            <div className="relative">
+              <input
+                className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
+                  matchPasswordErrMessage && "border-red-500"
+                }`}
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={matchPassword}
+                onChange={(e) => setMatchPassword(e.target.value)}
+                required
+              />
+              <button
+                  type="button"
+                  onClick={toggleConfirmPasswordVisibility}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+            </div>
+
             <input
               className={`w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500 ${
                 tokenErrorMessage && "border-red-500"
@@ -246,6 +264,7 @@ const SignUp = () => {
             {tokenErrorMessage && (
               <p className="text-red-500 text-sm">{tokenErrorMessage}</p>
             )}
+
             <button
               className={`w-full mt-6 px-4 py-3 bg-black text-white font-bold rounded hover:bg-gray-700 ${
                 errorsPresent && "cursor-not-allowed"
@@ -254,7 +273,9 @@ const SignUp = () => {
             >
               Create Account
             </button>
-            {errMsg && <p className="text-red-500">${errMsg} Invalid Entry</p>}
+
+          {errMsg && <p className="text-red-500">{errMsg} - Invalid Entry</p>}
+
           </form>
           <div className="text-center mt-4">
             <Link href="/login">Already have an Account ? Sign In</Link>
