@@ -231,6 +231,7 @@ const NewsInterests: React.FC<{}> = () => {
       catch (error: any) {
         if (error.name === 'AbortError') {
           console.log('Request timed out');
+          clearTimeout(timeout);
           i++;
         }
         else{
