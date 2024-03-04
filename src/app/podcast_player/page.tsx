@@ -26,6 +26,10 @@ import { Noto_Sans_Tamil_Supplement } from "next/font/google";
 
 // 4. When intro is done grab the next segment. ( Develop this a linked list of segments.)
 // 5. When the next segment is done grab the next segment.
+const googleFormUrl = "https://docs.google.com/forms/d/1GTTLL2PTXwviH8sjKyyVgE0y81QwTjYJ-1bNuQgNONM";
+const goToGoogleForm = () => {
+  window.open(googleFormUrl, "_blank");
+};
 
 const reverseKeyValuePairs = (inputDict: {
   [key: string]: string;
@@ -355,6 +359,13 @@ const AudioPlayer: React.FC = () => {
           {error}
         </div>
       )}
+      <button
+        onClick={goToGoogleForm}
+        className="px-4 py-2 mt-4 bg-blue-500 text-black rounded hover:bg-white-700 focus:outline-none focus:shadow-outline"
+      >
+        Click Here to Fill out Our Early Access Survey!🙌
+      </button>
+
       <div className="max-w-4xl w-full">
         <p className="inline-block px-3 py-1 border border-gray-300 text-sm text-gray-700 bg-gray-100 rounded-full mb-4">
           {reversedMap.get(content_preview?.topic || "Advanced Topics")}
