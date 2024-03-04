@@ -107,15 +107,6 @@ const SignUp = () => {
     return EMAIL_REGEX.test(email);
   }
 
-  function handleEmailChange(e: any) {
-    setEmail(e.target.value);
-    if (validateEmail()) {
-      setEmailErr(false);
-    } else {
-      setEmailErr(true);
-    }
-  }
-
   function checkPasswordValidity(pwd: string) {
     if (pwd.length < 8) {
       setPasswordErrMessage("Password must be 8 at least characters");
@@ -263,7 +254,7 @@ const SignUp = () => {
             >
               Create Account
             </button>
-            {errMsg && <p className="text-red-500">Invalid Entry</p>}
+            {errMsg && <p className="text-red-500">${errMsg} Invalid Entry</p>}
           </form>
           <div className="text-center mt-4">
             <Link href="/login">Already have an Account ? Sign In</Link>
