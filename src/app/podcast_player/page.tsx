@@ -235,6 +235,11 @@ const AudioPlayer: React.FC = () => {
   };
 
   async function streamAudio(podcastIndex: string) {
+    if (process.env.NODE_ENV !== "production") {
+      setAudioSrc("/test.mp3");
+      return;
+    }
+
     const url = `${base}get-segment-stream`;
     const email = getCookie("email");
     const jwt = getCookie("jwt-token");
