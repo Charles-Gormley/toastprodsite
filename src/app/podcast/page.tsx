@@ -180,7 +180,7 @@ const NewsInterests: React.FC<{}> = () => {
 
 
     
-    for (let i = 0; i < selectedBasicTopics.length; i) {
+    for (let i = 0; i < 3; i) {
       const timeout = setTimeout(() => controller.abort(), 1000*15); 
       try {
         const response = await fetch(url, {
@@ -188,6 +188,8 @@ const NewsInterests: React.FC<{}> = () => {
           headers: headers,
           body: JSON.stringify(payload),
         });
+
+        i = 3;
 
         clearTimeout(timeout);
 
