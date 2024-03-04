@@ -145,6 +145,7 @@ const SignUp = () => {
     // if button enabled with JS hack
     if (!isTokenValid) {
       console.error("Invalid access token. Please check and try again.");
+      setErrMsg("Invalid access token. Please check and try again.");
       return; // Exit the function if there's a token error
     }
 
@@ -179,7 +180,9 @@ const SignUp = () => {
 
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(errorMessage || "Failed to sign up user.,");
+        setErrMsg(errorMessage || "Failed to sign up user.");
+        throw new Error(errorMessage || "Failed to sign up user.");
+        
       }
 
       console.log("User signed up successfully");
@@ -253,7 +256,7 @@ const SignUp = () => {
               <p className="text-red-500 text-sm">{tokenErrorMessage}</p>
             )}
             <button
-              className={`w-full mt-6 px-4 py-3 bg-black text-black font-bold rounded hover:bg-gray-700 ${
+              className={`w-full mt-6 px-4 py-3 bg-black text-white font-bold rounded hover:bg-gray-700 ${
                 errorsPresent && "cursor-not-allowed"
               }`}
               disabled={errorsPresent}
