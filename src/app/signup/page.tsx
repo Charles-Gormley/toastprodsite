@@ -109,15 +109,15 @@ const SignUp = () => {
 
   function checkPasswordValidity(pwd: string) {
     if (pwd.length < 8) {
-      setPasswordErrMessage("Password must be 8 at least characters");
+      setErrMsg("Password must be 8 at least characters");
       return false;
     }
     if (pwd.length > 24) {
-      setPasswordErrMessage("Password must be less than 24 characters");
+      setErrMsg("Password must be less than 24 characters");
       return false;
     }
     setPasswordErrMessage("");
-    return false
+    return true;
   }
 
   function checkMatchPassword(password: string, matchPassword: string) {
@@ -148,7 +148,6 @@ const SignUp = () => {
     }
     
     if (!checkPasswordValidity(password)) {
-      setErrMsg("Invalid password");
       return; // Exit function to prevent further execution
     }
 
