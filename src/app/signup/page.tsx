@@ -16,6 +16,9 @@ const SignUp = () => {
   const [matchPassword, setMatchPassword] = useState("");
   const [matchPasswordErrMessage, setMatchPasswordErrMessage] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false); // For the password field
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [errMsg, setErrMsg] = useState("");
 
   const [errorsPresent, setErrorsPresent] = useState(false);
@@ -23,12 +26,20 @@ const SignUp = () => {
   const [accessCode, setAccessCode] = useState("");
   const [tokenErrorMessage, setTokenErrorMessage] = useState("");
 
-  const fetchData = async (currentAccessCode: string) => {
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const checkAccessCode = async (currentAccessCode: string, email: string) => {
     const url =
       "https://k4pb7ngegvtmqlvzfb2rj6zujm0jlbbt.lambda-url.us-east-1.on.aws/";
     const params = new URLSearchParams({
       accessToken: currentAccessCode,
-      email: "123@test.com",
+      email: email,
     });
 
     try {
@@ -48,18 +59,18 @@ const SignUp = () => {
     }
   };
 
-  async function handleTokenChange(e: any) {
-    const newAccessCode = e.target.value;
-    setAccessCode(newAccessCode);
+  // async function handleTokenChange(e: any) {
+  //   const newAccessCode = e.target.value;
+  //   setAccessCode(newAccessCode);
 
-    fetchData(newAccessCode).then((isValid) => {
-      if (isValid) {
-        setTokenErrorMessage("");
-      } else {
-        setTokenErrorMessage("Invalid access code.");
-      }
-    });
-  }
+  //   fetchData(newAccessCode, email).then((isValid) => {
+  //     if (isValid) {
+  //       setTokenErrorMessage("");
+  //     } else {
+  //       setTokenErrorMessage("Invalid access code.");
+  //     }
+  //   });
+  // }
 
   //if ((await fetchData()) === false) {
   //  setTokenErrorMessage("Invalid access code.");
@@ -105,44 +116,32 @@ const SignUp = () => {
     }
   }
 
-  function handlePasswordChange(e: any) {
-    const pwd = e.target.value;
-    setPassword(e.target.value);
+  function checkPasswordValidity(pwd: string) {
     if (pwd.length < 8) {
       setPasswordErrMessage("Password must be 8 at least characters");
-      return;
+      return false;
     }
     if (pwd.length > 24) {
       setPasswordErrMessage("Password must be less than 24 characters");
-      return;
-    }
-    if (!PWD_REGEX.test(pwd)) {
-      setPasswordErrMessage(
-        "Invalid Password: You must include uppercase and lowercase letters, a number and a special character. Allowed special characters: ! @ # $ %"
-      );
-      return;
+      return false;
     }
     setPasswordErrMessage("");
+    return false
   }
 
-  function handleMatchPasswordChange(e: any) {
-    const newPassword = e.target.value;
-    setMatchPassword(newPassword);
-    if (password === newPassword) {
+  function checkMatchPassword(password: string, matchPassword: string) {
+    if (password === matchPassword) {
       setMatchPasswordErrMessage("");
+      return true;
     } else {
       setMatchPasswordErrMessage("Passwords Do Not Match");
+      return false;
     }
   }
-  // if button enabled with JS hack
-  // if (tokenErrorMessage) {
-  //  console.error("Invalid access token. Please check and try again.");
-  //  return; // Exit the function if there's a token error
-  //}
   const router = useRouter();
   async function handleSubmit(e: any) {
     e.preventDefault();
-    const isTokenValid = await fetchData(accessCode);
+    const isTokenValid = await checkAccessCode(accessCode, email);
     // if button enabled with JS hack
     if (!isTokenValid) {
       console.error("Invalid access token. Please check and try again.");
@@ -150,22 +149,23 @@ const SignUp = () => {
     }
 
     const isEmailValid = EMAIL_REGEX.test(email);
-    const isPasswordValid = PWD_REGEX.test(password);
-
-    if (!isEmailValid || !isPasswordValid) {
-      setErrMsg("Invalid Entry");
-      return;
-    }
 
     if (!isEmailValid) {
       setErrMsg("Invalid email address");
       return; // Exit function to prevent further execution
     }
-
-    if (!isPasswordValid) {
+    
+    if (!checkPasswordValidity(password)) {
       setErrMsg("Invalid password");
       return; // Exit function to prevent further execution
     }
+
+    if (!checkMatchPassword(password, matchPassword)) {
+      setErrMsg("Passwords do not match");
+      return; // Exit function to prevent further execution
+    }
+
+    
 
     try {
       const response = await fetch(
@@ -179,7 +179,7 @@ const SignUp = () => {
 
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(errorMessage || "Failed to sign up user");
+        throw new Error(errorMessage || "Failed to sign up user.,");
       }
 
       console.log("User signed up successfully");
@@ -212,7 +212,7 @@ const SignUp = () => {
               type="email"
               placeholder="Email Address"
               value={email}
-              onChange={handleEmailChange}
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
               required
             />
             {emailErr && <p className="text-red-500 text-sm">Invalid Email</p>}
@@ -223,7 +223,7 @@ const SignUp = () => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
             {passwordErrMessage && password && (
@@ -236,7 +236,7 @@ const SignUp = () => {
               type="password"
               placeholder="Confirm Password"
               value={matchPassword}
-              onChange={handleMatchPasswordChange}
+              onChange={(e) => setMatchPassword(e.target.value)}
               required
             />
             <input
@@ -246,7 +246,7 @@ const SignUp = () => {
               type="text"
               placeholder="Enter Access Token"
               value={accessCode}
-              onChange={handleTokenChange}
+              onChange={(e) => setAccessCode(e.target.value)}
               required
             />
             {tokenErrorMessage && (
