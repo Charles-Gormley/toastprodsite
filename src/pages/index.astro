@@ -1,0 +1,86 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro"
+import { Image } from "astro:assets";
+import heroImage from "@/assets/heroImg.png";
+---
+
+<MainLayout>
+  <div class="flex flex-col-reverse lg:flex-row justify-between items-center pt-16 pb-8 md:pt-12 md:pb-24 text-black">
+    <div class="lg:w-1/2 px-4 py-6 text-center lg:text-left">
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold">
+        The Future of News is Here
+      </h1>
+      <p class="text-lg mt-4 text-slate-600">
+        Experience AI Curated Podcasts at your fingertips. Hear only the
+        stories YOU want to hear, without the bias. With sources from thousands
+        of articles, you can learn more in just one click.
+      </p>
+      <div class="mt-6">
+        <a href="/signup"><button class="btn btn-outline btn-lg mr-4 mb-4 text-black">Sign Up</button></a>
+      </div>
+    </div>
+
+    <div class="lg:w-1/2 flex justify-center lg:justify-end px-4 py-6">
+      <Image
+        src={heroImage}
+        alt="Charlie The Podcaster"
+        width={500}
+        height={500}
+        class="rounded-lg"
+      />
+    </div>
+
+    <button class="md:hidden">
+      <a
+        href="/login"
+        class="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent"
+      >
+        Create Your Podcast
+      </a>
+    </button>
+  </div>
+
+  <section class="my-12 md:px-16 xl:px-24 flex flex-col lg:flex-row text-black">
+    <div class="flex-1">
+      <a>PlaceHolder</a>
+    </div>
+    <div class="flex-1 p-6">
+      <h1 class="text-4xl font-bold mb-4">
+        A New way to stay in the know.
+      </h1>
+      <h2 class="text-xl mb-4">
+        Building on modern foundations
+      </h2>
+      <div class="mb-4">
+        <h3 class="text-lg font-bold">
+          It’s free! Yes, really.
+        </h3>
+        <p>
+          Access our free tier, supported by ads, to craft personalized
+          5-minute news podcasts curated to match your interests precisely.
+        </p>
+      </div>
+      <div class="mb-4">
+        <h3 class="text-lg font-bold">
+          Anytime, Anywhere
+        </h3>
+        <p>
+          Stay ahead of the curve with our breaking news coverage. We generate
+          content on recent events to offer a nuanced understanding of all
+          perspectives involved. Stay informed with our concise, comprehensive
+          updates.
+        </p>
+      </div>
+      <div class="mb-4">
+        <h3 class="text-lg font-bold">
+          Unbiased and Unfiltered
+        </h3>
+        <p>
+          Experience mathematically unbiased news. We’ve scoured the internet
+          to bring you balanced input from all sides of the story in an easy to
+          digest format.
+        </p>
+      </div>
+    </div>
+  </section>
+</MainLayout>
