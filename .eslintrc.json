@@ -1,6 +1,0 @@
-{
-  "rules": {
-    "*": "off"
-    // add other rules you want to turn off
-  }
-}
