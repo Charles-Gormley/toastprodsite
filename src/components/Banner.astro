@@ -1,0 +1,98 @@
+---
+import { Image } from "astro:assets";
+import logo from "@/assets/logo.svg";
+
+const tabs = [
+  ["/", "Home"],
+  ["/pricing", "Pricing"],
+  ["/contact", "Contact Us"],
+];
+---
+
+<style>
+  /* Remove default disclosure triangle icon */
+  summary::-webkit-details-marker,
+  summary::marker { display: none; content: ""; }
+</style>
+
+<nav class="flex items-center justify-between py-4 px-6 bg-white text-black">
+  <Image
+    src={logo}
+    alt="Logo"
+    width={40}
+    height={40}
+  />
+  <span>Tokenized Toast <sub style={{ fontFamily: "Covered By Your Grace" }} class="text-5xl ml-4">Pilot</sub></span>
+  <!-- HACK: using a details element is not good for accessibility. -->
+  <details class="group">
+    <summary
+      id="menu-button"
+      class="md:hidden px-2 py-1 border rounded text-gray-900"
+    >
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          class="hidden group-open:inline"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+        <path
+          class="inline group-open:hidden"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        />
+      </svg>
+    </summary>
+
+    <div class="md:hidden flex-col items-center fixed inset-0 top-14 mt-2 bg-white">
+      <ul class="w-full space-y-1">
+        {tabs.map(([href, label]) => (
+          <li
+            class="text-gray-900"
+          >
+            <a class="block text-center py-2" href={href}>
+              {label}
+            </a>
+          </li>
+        ))}
+        <li class="w-full">
+          <a
+            class="block text-center py-2 bg-black text-white font-bold rounded hover:bg-gray-800 transition duration-300 w-full"
+            href="/login"
+          >
+            Create Your Podcast
+          </a>
+        </li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="hidden md:flex flex-1 justify-center items-center">
+    <ul class="flex space-x-4">
+      {tabs.map(([href, label]) => (
+        <li
+          class="text-gray-900 hover:font-bold"
+        >
+          <a href={href}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="hidden md:block">
+    <a href="/login">
+      <button class="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent transition duration-300">
+        Create Your Podcast
+      </button>
+    </a>
+  </div>
+</nav>
+
