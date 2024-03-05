@@ -11,7 +11,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        inter: ["inter", ...defaultTheme.fontFamily.sans]
+        inter: ["Inter", ...defaultTheme.fontFamily.sans],
       }
     },
   },
