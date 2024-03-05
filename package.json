@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource-variable/inter": "^5.0.17",
+    "@fontsource/covered-by-your-grace": "^5.0.8",
     "@heroicons/react": "^2.1.1",
     "@madzadev/audio-player": "^2.1.2",
     "astro": "^4.4.11",

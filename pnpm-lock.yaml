@@ -8,6 +8,12 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.1.0
     version: 5.1.0(astro@4.4.11)(tailwindcss@3.4.1)
+  '@fontsource-variable/inter':
+    specifier: ^5.0.17
+    version: 5.0.17
+  '@fontsource/covered-by-your-grace':
+    specifier: ^5.0.8
+    version: 5.0.8
   '@heroicons/react':
     specifier: ^2.1.1
     version: 2.1.1(react@18.2.0)
@@ -630,6 +636,14 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource-variable/inter@5.0.17:
+    resolution: {integrity: sha512-sa80nNnqF8kzhBvqusWiL9vlPMVpdmOwMmDBup46Jggsr1VBqo+YuzwB36Ls+X6uHJtb8Yv3ALBHL/zGmT862A==}
+    dev: false
+
+  /@fontsource/covered-by-your-grace@5.0.8:
+    resolution: {integrity: sha512-6gFVG0Cc1ucX7MZ3yAfZmvzJOwv3P41f3mmuag/D/wUDukm/+x4SeZ7KNYk4i0Yj8hSfuabO6pHjNfxvLcHNcw==}
+    dev: false
 
   /@heroicons/react@2.1.1(react@18.2.0):
     resolution: {integrity: sha512-JyyN9Lo66kirbCMuMMRPtJxtKJoIsXKS569ebHGGRKbl8s4CtUfLnyKJxteA+vIKySocO4s1SkTkGS4xtG/yEA==}
