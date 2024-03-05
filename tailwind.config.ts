@@ -13,6 +13,7 @@ const config: Config = {
       },
       fontFamily: {
         inter: ["Inter", ...defaultTheme.fontFamily.sans],
+        cbyg: ["Covered By Your Grace", "cursive", ...defaultTheme.fontFamily.serif]
       }
     },
   },
