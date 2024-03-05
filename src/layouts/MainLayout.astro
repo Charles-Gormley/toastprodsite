@@ -1,0 +1,30 @@
+---
+import HeadMeta from "@/components/HeadMeta.astro";
+import Banner from "@/components/Banner.astro";
+import Footer from "@/components/Footer.astro";
+import "@fontsource-variable/inter";
+import "@fontsource/covered-by-your-grace";
+
+type Props = {
+  title?: string
+  description?: string,
+}
+
+const {
+  title = "Tokenized Toast | AI Podcast Generator",
+  description = "AI Podcast Generator",
+} = Astro.props;
+
+---
+<html lang="en">
+  <head>
+    <HeadMeta {title} {description} />
+  </head>
+  <body>
+    <Banner />
+    <main class="font-inter">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
