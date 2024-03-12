@@ -87,7 +87,7 @@ const TopicButton: React.FC<TopicButtonProps> = ({
 
   const unselectedStyle = {
     ...baseStyle,
-    backgroundColor: isHovered ? "#E0E0E0" : "#FAFAFA", // Slightly darker on hover for unselected
+    backgroundColor: isHovered ? "#E0E0E0" : "#FAFAFA", 
     color: "black",
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
   };
