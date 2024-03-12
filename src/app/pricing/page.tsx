@@ -49,7 +49,7 @@ const pricing: PricingPlan[] = [
     ],
     button: {
       text: "Get Started",
-      link: "#",
+      link: "https://buy.stripe.com/test_aEU3d622f01bdzidQQ",
     },
   },
   {
