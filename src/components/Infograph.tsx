@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import microphoneImage from "../assets/microphone.png";
+import networkImage from "../assets/network.png";
 import Container from './Container';
 
 interface Feature {
@@ -23,8 +23,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     <Container>
       <main className="flex flex-col lg:flex-row text-black">
       <Image
-            src={microphoneImage}
-            alt="Microphone"
+            src={networkImage}
+            alt="network"
             width={500}
             height={500}
             className="rounded-lg"
