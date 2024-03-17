@@ -11,7 +11,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-white flex flex-col">
         <Hero
-          title="A Mathematical Approach to News."
+          title="The Future of News is Here."
           subtitle="Experience an AI/ML Driven News Platforms. Look at the bias within news stories, get a carefully curated list of articles around your favorite topics, generate news roundup podcasts, listen to AI News Debates around podcasts, and be more informed about your world without the bias."
         />
 
@@ -27,7 +27,7 @@ export default function Home() {
         )}
 
         <Infograph
-          heading="The Future of News is Here."
+          heading="A Mathematical Approach to News."
           subHeading="Building on modern foundations"
           features={[
             {
