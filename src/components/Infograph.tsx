@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     <Container>
       <main className="flex flex-col lg:flex-row text-black">
         <div className="flex-1">
-          <a>PlaceHolder</a>
+          <img src="../assets/microphone.png" alt="DESCRIPTION_OF_YOUR_IMAGE" />
         </div>
         <div className="flex-1 p-6">
           <h1 className="text-4xl font-bold mb-4">{heading}</h1>
