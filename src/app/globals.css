@@ -14,9 +14,9 @@ body {
 }
 
 .button-hover:hover {
-  background-color: #e6c148f3; /* A darker shade of amber for hover effect */
-  transform: scale(1.05); /* Slightly increase the size */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  background-color: #f6c446fb; /* A darker shade of amber for hover effect */
+  transform: scale(1.01); /* Slightly increase the size */
+  transition: background-color 0.1s ease, transform 0.1s ease; /* Smooth transition */
 }
 
 

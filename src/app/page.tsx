@@ -10,21 +10,24 @@ export default function Home() {
 
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        <Hero
-          title="The Future of News is Here."
-          subtitle="Experience an AI/ML Driven News Platforms. Look at the bias within news stories, get a carefully curated list of articles around your favorite topics, generate news roundup podcasts, listen to AI News Debates around podcasts, and be more informed about your world without the bias."
-        />
-
         {isMobile && (
           <button>
             <a
               href="/login"
-              className="btn rounded-full px-6 py-2 bg-amber-300 text-white font-bold border border-transparent button-hover"
+              className="btn rounded-full px-6 py-2 bg-secondary text-white font-bold border border-transparent button-hover"
             >
               Create Your Podcast
             </a>
           </button>
         )}
+
+
+        <Hero
+          title="The Future of News is Here."
+          subtitle="Experience an AI/ML Driven News Platforms. Look at the bias within news stories, get a carefully curated list of articles around your favorite topics, generate news roundup podcasts, listen to AI News Debates around podcasts, and be more informed about your world without the bias."
+        />
+
+        
 
         <Infograph
           heading="A Mathematical Approach to News."
