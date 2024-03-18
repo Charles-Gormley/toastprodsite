@@ -86,7 +86,7 @@ const NavBar: React.FC = () => {
           ))}
           <li className="w-full">
             <Link
-              className="btn rounded-full px-6 py-2 bg-secondary text-white font-bold border border-transparent button-hover"
+              className="btn rounded-full px-6 py-2 bg-toastPrimary text-white font-bold border border-transparent button-hover"
               href="/login"
               onClick={handleMenuClick}
             >
