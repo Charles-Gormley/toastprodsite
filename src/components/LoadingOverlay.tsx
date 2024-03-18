@@ -5,19 +5,22 @@ import React, { useState, useEffect } from 'react';
 const LoadingOverlay: React.FC = () => {
   const [progress, setProgress] = useState<number>(0);
 
+  const estimatedTime = 12000; // seconds
+  const increment = estimatedTime/100;
+
   useEffect(() => {
     const interval = setInterval(() => {
       // Increment the progress by approximately 8.25% every second to reach 99% in 12 seconds
       if (progress < 99) {
-        setProgress((prevProgress) => prevProgress + 8.25);
+        setProgress((prevProgress) => prevProgress + 1);
       }
-    }, 1000);
+    }, increment);
 
     // After 12 seconds, clear the interval and set progress to 99%
     setTimeout(() => {
       clearInterval(interval);
       setProgress(99);
-    }, 12000);
+    }, estimatedTime);
 
     return () => clearInterval(interval);
   }, [progress]);
@@ -51,7 +54,7 @@ const LoadingOverlay: React.FC = () => {
           style={{
             width: `${progress}%`,
             height: '100%',
-            backgroundColor: 'amber-300', // Change color to amber-300
+            backgroundColor: '#F6C546', // Change color to amber-300
           }}
         />
       </div>
