@@ -19,7 +19,7 @@ export default function Home() {
           <button>
             <a
               href="/login"
-              className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent"
+              className="btn rounded-full px-6 py-2 bg-amber-300 text-white font-bold border border-transparent button-hover"
             >
               Create Your Podcast
             </a>
