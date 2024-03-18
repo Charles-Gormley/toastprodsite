@@ -10,16 +10,7 @@ export default function Home() {
 
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        {isMobile && (
-          <button>
-            <a
-              href="/login"
-              className="btn rounded-full px-6 py-2 bg-amber-300 text-white font-bold border border-transparent button-hover"
-            >
-              Create Your Podcast
-            </a>
-          </button>
-        )}
+        
 
 
         <Hero
