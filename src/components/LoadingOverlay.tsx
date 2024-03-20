@@ -41,6 +41,7 @@ const LoadingOverlay: React.FC = () => {
         zIndex: 1000,
       }}
     >
+      <p>Generating Your Podcast!</p>
       <div
         style={{
           width: '200px', // Adjust the width as needed
@@ -50,6 +51,7 @@ const LoadingOverlay: React.FC = () => {
           overflow: 'hidden',
         }}
       >
+        
         <div
           style={{
             width: `${progress}%`,
