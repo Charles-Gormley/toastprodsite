@@ -179,9 +179,9 @@ const NewsInterests: React.FC<{}> = () => {
     setCookie("tone", selectedTone);
 
 
-    let retryTime = 60*1000;  // 1 minute
-    let retryInterval = 1000; // 1 second
-    let maxRetries = retryTime / retryInterval;
+    let retryTime = 120*1000;  // 2 minute
+    let retryInterval = 15*1000; // 1 second
+    let maxRetries = Math.round(retryTime / retryInterval);
 
     
     for (let i = 0; i < maxRetries; i) {
@@ -193,7 +193,7 @@ const NewsInterests: React.FC<{}> = () => {
           body: JSON.stringify(payload),
         });
 
-        i = 3;
+        i = maxRetries;
 
         clearTimeout(timeout);
 
