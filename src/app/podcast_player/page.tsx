@@ -275,14 +275,14 @@ const AudioPlayer: React.FC = () => {
             "Welcome to Tokenized Toast! We are a podcast that covers a wide range of topics, from finance and technology to health and geopolitics. Our goal is to provide you with engaging and informative content that will help you stay informed and up-to-date on the latest trends and developments in these fields. So sit back, relax, and enjoy the show!",
           source: "https://www.tokenizedtoast.com/",
         };
-        setContentPreview(content_preview);
 
         
 
         if (podcastIndex !== "intro") {
           content_preview = await getPodcastPreview(podcastIndex);
-          setContentPreview(content_preview);
+          
         }
+        setContentPreview(content_preview);
 
         setAudioSrc(stream_url);
       } else {
