@@ -32,6 +32,8 @@ export default function Verification({ params }: { params: { email: string}}) {
     return (
         <div className="h-screen flex items-center justify-center">
         <section className="flex-col">
+            <h1>Please verfify your email so we know its you!</h1>
+            <p>We have sent you a verification email to your email address: {params.email}. You have 24 hours to verify.</p>
             <p className="text-lg font-bold text-center mb-3">Enter Verification Code</p>
             <VerificationInput 
                 validChars="0-9"

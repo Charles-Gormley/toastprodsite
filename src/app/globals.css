@@ -23,6 +23,12 @@ input {
   background-color: white; 
 }
 
+.button-hover:hover {
+  background-color: #f6c446fb; /* A darker shade of amber for hover effect */
+  transform: scale(1.01); /* Slightly increase the size */
+  transition: background-color 0.1s ease, transform 0.1s ease; /* Smooth transition */
+}
+
 
 /* Plyr Audio Player Customizations */
 

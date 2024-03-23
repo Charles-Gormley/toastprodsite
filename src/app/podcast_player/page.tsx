@@ -229,12 +229,17 @@ const AudioPlayer: React.FC = () => {
         } else {
           setPodcastIndex(String(parseInt(podcastIndex) + 1));
           return;
-        }
+        } 
       }
     }
   };
 
   async function streamAudio(podcastIndex: string) {
+    if (process.env.NODE_ENV !== "production") {
+      setAudioSrc("/test.mp3");
+      return;
+    }
+
     const url = `${base}get-segment-stream`;
     const email = getCookie("email");
     const jwt = getCookie("jwt-token");
@@ -262,10 +267,22 @@ const AudioPlayer: React.FC = () => {
         const stream_url = jsonResponse.url;
         console.log("url", stream_url);
 
+        
+        content_preview = {
+          topic: "Intro",
+          content_preview_title: "Welcome to Tokenized Toast!",
+          script:
+            "Welcome to Tokenized Toast! We are a podcast that covers a wide range of topics, from finance and technology to health and geopolitics. Our goal is to provide you with engaging and informative content that will help you stay informed and up-to-date on the latest trends and developments in these fields. So sit back, relax, and enjoy the show!",
+          source: "https://www.tokenizedtoast.com/",
+        };
+
+        
+
         if (podcastIndex !== "intro") {
           content_preview = await getPodcastPreview(podcastIndex);
-          setContentPreview(content_preview);
+          
         }
+        setContentPreview(content_preview);
 
         setAudioSrc(stream_url);
       } else {

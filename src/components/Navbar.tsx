@@ -86,7 +86,7 @@ const NavBar: React.FC = () => {
           ))}
           <li className="w-full">
             <Link
-              className="block text-center py-2 bg-black text-white font-bold rounded hover:bg-gray-800 transition duration-300 w-full"
+              className="btn rounded-full px-6 py-2 bg-amber-300 text-black font-bold border border-transparent button-hover"
               href="/login"
               onClick={handleMenuClick}
             >
@@ -111,7 +111,7 @@ const NavBar: React.FC = () => {
 
       <div className="hidden md:block">
         <Link href="/login" onClick={handleMenuClick}>
-          <button className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent transition duration-300">
+          <button className="btn rounded-full px-6 py-2 bg-amber-300 text-black font-bold border border-transparent button-hover">
             Create Your Podcast
           </button>
         </Link>

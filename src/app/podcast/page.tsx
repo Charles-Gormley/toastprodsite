@@ -179,9 +179,13 @@ const NewsInterests: React.FC<{}> = () => {
     setCookie("tone", selectedTone);
 
 
+    let retryTime = 120*1000;  // 2 minute
+    let retryInterval = 15*1000; // 1 second
+    let maxRetries = Math.round(retryTime / retryInterval);
+
     
-    for (let i = 0; i < 3; i) {
-      const timeout = setTimeout(() => controller.abort(), 1000*15); 
+    for (let i = 0; i < maxRetries; i) {
+      const timeout = setTimeout(() => controller.abort(), retryInterval); 
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -189,7 +193,7 @@ const NewsInterests: React.FC<{}> = () => {
           body: JSON.stringify(payload),
         });
 
-        i = 3;
+        i = maxRetries;
 
         clearTimeout(timeout);
 
@@ -205,7 +209,7 @@ const NewsInterests: React.FC<{}> = () => {
           } 
           else if (response.status === 403 || response.status === 404) {
             setError(
-              "Hmmm. seems like you haven'nt logged in for awhile or your session has expired. Please login again to enjoy the best podcasts on earth."
+              "Hmmm. seems like you haven'nt logged in for awhile or your session has expired. Please login again."
             );  
           } 
           else if (response.status === 429){

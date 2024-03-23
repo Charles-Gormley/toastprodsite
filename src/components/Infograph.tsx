@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import networkImage from "../assets/network.png";
 import Container from './Container';
 
 interface Feature {
@@ -21,9 +22,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <Container>
       <main className="flex flex-col lg:flex-row text-black">
-        <div className="flex-1">
-          <a>PlaceHolder</a>
-        </div>
+      <Image
+            src={networkImage}
+            alt="network"
+            width={500}
+            height={500}
+            className="rounded-lg"
+          />
         <div className="flex-1 p-6">
           <h1 className="text-4xl font-bold mb-4">{heading}</h1>
           <h2 className="text-xl mb-4">{subHeading}</h2>

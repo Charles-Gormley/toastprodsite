@@ -10,38 +10,41 @@ export default function Home() {
 
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        <Hero
-          title="The Future of News is Here"
-          subtitle="Experience AI Curated Podcasts at your fingertips. Hear only the stories YOU want to hear, without the bias. With sources from thousands of articles, you can learn more in just one click."
-        />
-
         {isMobile && (
           <button>
             <a
               href="/login"
-              className="btn rounded-full px-6 py-2 bg-black text-white font-bold hover:bg-gray-800 border border-transparent"
+              className="btn rounded-full px-6 py-2 bg-amber-300 text-black font-bold border border-transparent button-hover"
             >
               Create Your Podcast
             </a>
           </button>
         )}
 
+
+        <Hero
+          title="The Future of News is Here."
+          subtitle="Experience an AI/ML Driven News Platforms. Look at the bias within news stories, get a carefully curated list of articles around your favorite topics, generate news roundup podcasts, listen to AI News Debates around podcasts, and be more informed about your world without the bias."
+        />
+
+        
+
         <Infograph
-          heading="A New way to stay in the know."
+          heading="A Mathematical Approach to News."
           subHeading="Building on modern foundations"
           features={[
             {
-              title: "It’s free! Yes, really.",
+              title: "It’s free!",
               description:
-                "Access our free tier, supported by ads, to craft personalized 5-minute news podcasts curated to match your interests precisely.",
+                "Access our ad-supported tier to search through your news feed and listen to quick news roundup podcasts.",
             },
             {
-              title: "Anytime, Anywhere",
+              title: "Broad Coverage. In Depth Analysis",
               description:
                 "Stay ahead of the curve with our breaking news coverage. We generate content on recent events to offer a nuanced understanding of all perspectives involved. Stay informed with our concise, comprehensive updates.",
             },
             {
-              title: "Unbiased and Unfiltered",
+              title: "View the Bias to see the Full Picture",
               description:
                 "Experience mathematically unbiased news. We’ve scoured the internet to bring you balanced input from all sides of the story in an easy to digest format.",
             },
