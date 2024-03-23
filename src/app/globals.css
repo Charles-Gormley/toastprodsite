@@ -11,6 +11,16 @@ p {
 
 body {
   background-color: white;
+  color: black;
+
+}
+
+textarea {
+  background-color: white; 
+}
+
+input {
+  background-color: white; 
 }
 
 .button-hover:hover {
