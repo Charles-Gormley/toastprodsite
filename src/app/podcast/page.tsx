@@ -180,7 +180,7 @@ const NewsInterests: React.FC<{}> = () => {
 
 
     let retryTime = 120*1000;  // 2 minute
-    let retryInterval = 15*1000; // 1 second
+    let retryInterval = 30*1000; // 1 second
     let maxRetries = Math.round(retryTime / retryInterval);
 
     
